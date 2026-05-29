@@ -821,6 +821,132 @@
       line-height: 1.5;
     }
 
+    /* ── BALANCE REPORT TABS ── */
+    .bal-tabs {
+      display: flex;
+      gap: .4rem;
+      background: rgba(0,0,0,.3);
+      border-radius: 8px;
+      padding: .3rem;
+      margin-bottom: 1.2rem;
+    }
+    .bal-tab {
+      flex: 1;
+      padding: .55rem;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .9rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .bal-tab.active {
+      background: var(--green);
+      color: var(--dark);
+      font-weight: 700;
+    }
+    .bal-panel { display: none; }
+    .bal-panel.active { display: block; animation: fadeUp .3s ease both; }
+
+    /* ── LEADERBOARD ── */
+    .leaderboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Barlow Condensed', sans-serif;
+    }
+    .leaderboard-table th {
+      font-size: .68rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: .4rem .6rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .leaderboard-table td {
+      padding: .65rem .6rem;
+      border-bottom: 1px solid rgba(45,64,56,.5);
+      font-size: .9rem;
+      vertical-align: middle;
+    }
+    .leaderboard-table tr:last-child td { border-bottom: none; }
+    .lb-rank {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--muted);
+      width: 36px;
+    }
+    .lb-rank.gold { color: #ffd740; }
+    .lb-rank.silver { color: #cfd8dc; }
+    .lb-rank.bronze { color: #ff8a65; }
+    .lb-name { font-weight: 600; color: var(--text); }
+    .lb-name.me { color: var(--green); }
+    .lb-pts {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      text-align: right;
+    }
+    .lb-pts.pos { color: var(--green); }
+    .lb-pts.neg { color: var(--red); }
+    .lb-pts.zero { color: var(--muted); }
+    .lb-detail {
+      font-size: .72rem;
+      color: var(--muted);
+      text-align: right;
+    }
+    .lb-you-badge {
+      display: inline-block;
+      background: rgba(0,230,118,.15);
+      color: var(--green);
+      border: 1px solid rgba(0,230,118,.3);
+      border-radius: 20px;
+      font-size: .6rem;
+      padding: .05rem .4rem;
+      margin-left: .4rem;
+      letter-spacing: .08em;
+      vertical-align: middle;
+    }
+    .lb-loading {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .85rem;
+      letter-spacing: .1em;
+    }
+
+    /* ── POINT RATIO INFO ── */
+    .pts-ratio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .5rem;
+      margin-bottom: 1.2rem;
+    }
+    .pts-ratio-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .6rem .8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .pts-ratio-label {
+      font-size: .72rem;
+      color: var(--muted);
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: .06em;
+    }
+    .pts-ratio-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+
     /* ═══════════════════════════════════════════
      LOADING + EMPTY
   ═══════════════════════════════════════════ */
@@ -1126,28 +1252,67 @@
       <!-- BALANCE -->
       <div class="section" id="sec-balance">
         <div class="section-title">Balance</div>
-        <div class="section-sub">Your current standing in the league.</div>
-        <div id="balance-content">
+        <div class="section-sub">Your standing and the full leaderboard.</div>
+
+        <!-- Report tabs -->
+        <div class="bal-tabs">
+          <button class="bal-tab active" id="baltab-personal" onclick="switchBalTab('personal')">&#x1F64B; My Report</button>
+          <button class="bal-tab" id="baltab-leaderboard" onclick="switchBalTab('leaderboard')">&#x1F3C6; Leaderboard</button>
+        </div>
+
+        <!-- Personal panel -->
+        <div class="bal-panel active" id="balpanel-personal">
           <div class="balance-hero">
             <div class="balance-label">Points Balance</div>
-            <div class="balance-amount"><span id="bal-points">–</span> <span class="balance-unit">pts</span></div>
+            <div class="balance-amount"><span id="bal-points">&#x2013;</span> <span class="balance-unit">pts</span></div>
           </div>
           <div class="balance-stats">
             <div class="stat-card">
-              <div class="stat-val green" id="bal-correct">–</div>
+              <div class="stat-val green" id="bal-correct">&#x2013;</div>
               <div class="stat-label">Correct</div>
             </div>
             <div class="stat-card">
-              <div class="stat-val red" id="bal-wrong">–</div>
+              <div class="stat-val red" id="bal-wrong">&#x2013;</div>
               <div class="stat-label">Wrong</div>
             </div>
             <div class="stat-card">
-              <div class="stat-val gold" id="bal-pending">–</div>
+              <div class="stat-val gold" id="bal-pending">&#x2013;</div>
               <div class="stat-label">Pending</div>
             </div>
           </div>
-          <div class="balance-note">
-            🏆 Points logic will be configured by the admin. Check back after matches are graded!
+          <div class="section-sub" style="margin-bottom:.6rem;">Diem theo vong dau</div>
+          <div class="pts-ratio-grid">
+            <div class="pts-ratio-item">
+              <span class="pts-ratio-label">Vong bang (m001-m072)</span>
+              <span class="pts-ratio-val">+/-1 pt</span>
+            </div>
+            <div class="pts-ratio-item">
+              <span class="pts-ratio-label">Vong 32 (m073-m088)</span>
+              <span class="pts-ratio-val">+/-2 pt</span>
+            </div>
+            <div class="pts-ratio-item">
+              <span class="pts-ratio-label">Vong 16 (m089-m096)</span>
+              <span class="pts-ratio-val">+/-3 pt</span>
+            </div>
+            <div class="pts-ratio-item">
+              <span class="pts-ratio-label">Tu ket (m097-m100)</span>
+              <span class="pts-ratio-val">+/-4 pt</span>
+            </div>
+            <div class="pts-ratio-item">
+              <span class="pts-ratio-label">Ban ket (m101-m102)</span>
+              <span class="pts-ratio-val">+/-5 pt</span>
+            </div>
+            <div class="pts-ratio-item">
+              <span class="pts-ratio-label">Chung ket (m103-m104)</span>
+              <span class="pts-ratio-val">+/-10 pt</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leaderboard panel -->
+        <div class="bal-panel" id="balpanel-leaderboard">
+          <div id="leaderboard-content">
+            <div class="lb-loading"><div class="spinner" style="margin:0 auto 1rem;"></div>Loading leaderboard...</div>
           </div>
         </div>
       </div>
@@ -1588,33 +1753,137 @@
     }
 
     // ════════════════════════════════════════════════════
+    // POINT MULTIPLIER BY MATCH ID
+    // ════════════════════════════════════════════════════
+    function getMatchMultiplier(matchId) {
+      // Extract numeric part from ids like 'm001', 'm072', etc.
+      const num = parseInt(matchId.replace(/\D/g, ''), 10);
+      if (num >= 103) return 10;
+      if (num >= 101) return 5;
+      if (num >= 97)  return 4;
+      if (num >= 89)  return 3;
+      if (num >= 73)  return 2;
+      return 1;
+    }
+
+    // ════════════════════════════════════════════════════
     // RENDER BALANCE
     // ════════════════════════════════════════════════════
     function renderBalance() {
-      // Match point
-      // Vong bang: 1pt
-      // Vong 32: 2pt
-      // Vong 16: 3pt
-      // Vong tu ket: 4pt
-      // Vong ban ket: 5pt
-      // Vong chung ket: 10pt
-      const MATCHES_POINT = 1;
-      const finished = allMatches.filter(m => m.result);
-      let correct = 0, wrong = 0, pending = 0;
+      let totalPoints = 0, correct = 0, wrong = 0, pending = 0;
 
       allMatches.forEach(m => {
         const pick = userPicks[m.id];
         if (!pick) return;
         const outcome = computeOutcome(m);
-        if (outcome === null) { pending++; }
-        else if (pick === outcome) { correct++; }
-        else { wrong++; }
+        const mult = getMatchMultiplier(m.id);
+        if (outcome === null) {
+          pending++;
+        } else if (pick === outcome) {
+          correct++;
+          totalPoints += mult;
+        } else {
+          wrong++;
+          totalPoints -= mult;
+        }
       });
 
       document.getElementById('bal-correct').textContent = correct;
       document.getElementById('bal-wrong').textContent = wrong;
       document.getElementById('bal-pending').textContent = pending;
-      document.getElementById('bal-points').textContent = correct - wrong; // 1 pt per correct — admin can change logic
+      const ptEl = document.getElementById('bal-points');
+      ptEl.textContent = totalPoints;
+      ptEl.style.color = totalPoints > 0 ? 'var(--green)' : totalPoints < 0 ? 'var(--red)' : 'var(--muted)';
+    }
+
+    // ════════════════════════════════════════════════════
+    // BALANCE TAB SWITCH
+    // ════════════════════════════════════════════════════
+    function switchBalTab(tab) {
+      document.querySelectorAll('.bal-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.bal-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('baltab-' + tab).classList.add('active');
+      document.getElementById('balpanel-' + tab).classList.add('active');
+      if (tab === 'leaderboard') renderLeaderboard();
+    }
+
+    // ════════════════════════════════════════════════════
+    // RENDER LEADERBOARD
+    // Fetches all users' picks from the backend, computes
+    // points for each using the same tiered multiplier, 
+    // then sorts highest → lowest.
+    // ════════════════════════════════════════════════════
+    async function renderLeaderboard() {
+      const container = document.getElementById('leaderboard-content');
+      container.innerHTML = '<div class="lb-loading"><div class="spinner" style="margin:0 auto 1rem;width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;"></div>Loading leaderboard...</div>';
+
+      let allPicks;
+      try {
+        const res = await callScript('getAllPicks', {});
+        if (!res.success) throw new Error(res.message || 'Failed');
+        allPicks = res.picks; // expected: { userId: { matchId: 'home'|'away', ... }, ... }
+      } catch (e) {
+        container.innerHTML = '<div class="lb-loading" style="color:var(--red);">Could not load leaderboard. Check backend.</div>';
+        return;
+      }
+
+      // Build per-user stats
+      const users = Object.keys(allPicks);
+      const rows = users.map(uid => {
+        const picks = allPicks[uid];
+        let pts = 0, cor = 0, wrg = 0;
+        allMatches.forEach(m => {
+          const pick = picks[m.id];
+          if (!pick) return;
+          const outcome = computeOutcome(m);
+          if (outcome === null) return;
+          const mult = getMatchMultiplier(m.id);
+          if (pick === outcome) { cor++; pts += mult; }
+          else { wrg++; pts -= mult; }
+        });
+        return { uid, name: allPicks[uid].__name__ || uid, pts, cor, wrg };
+      }).sort((a, b) => b.pts - a.pts || b.cor - a.cor);
+
+      if (!rows.length) {
+        container.innerHTML = '<div class="lb-loading">No participants yet.</div>';
+        return;
+      }
+
+      const rankIcons = ['&#x1F947;', '&#x1F948;', '&#x1F949;']; // gold/silver/bronze medals
+      const rankClass = ['gold', 'silver', 'bronze'];
+
+      const tableRows = rows.map((r, i) => {
+        const isMe = r.uid === currentUser.userId;
+        const rank = i + 1;
+        const rankDisplay = rank <= 3
+          ? `<span class="lb-rank ${rankClass[i]}">${rankIcons[i]}</span>`
+          : `<span class="lb-rank">${rank}</span>`;
+        const ptsClass = r.pts > 0 ? 'pos' : r.pts < 0 ? 'neg' : 'zero';
+        const meBadge = isMe ? '<span class="lb-you-badge">YOU</span>' : '';
+        return `
+          <tr>
+            <td class="lb-rank">${rankDisplay}</td>
+            <td><span class="lb-name ${isMe ? 'me' : ''}">${r.name}${meBadge}</span></td>
+            <td>
+              <div class="lb-pts ${ptsClass}">${r.pts > 0 ? '+' : ''}${r.pts}</div>
+              <div class="lb-detail">${r.cor}&#x2714; / ${r.wrg}&#x2716;</div>
+            </td>
+          </tr>`;
+      }).join('');
+
+      container.innerHTML = `
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+          <table class="leaderboard-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Player</th>
+                <th style="text-align:right;">Points</th>
+              </tr>
+            </thead>
+            <tbody>${tableRows}</tbody>
+          </table>
+        </div>`;
     }
 
     // ════════════════════════════════════════════════════
