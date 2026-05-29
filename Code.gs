@@ -4,10 +4,10 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ── CONFIG: fill these in before deploying ──────────────────────────
-const ADMIN_EMAIL     = 'admin@example.com';          // your email
-const APP_URL         = 'https://yourusername.github.io/your-repo/'; // your GitHub Pages URL
+const ADMIN_EMAIL     = 'hoiquananhba2026@gmail.com';          // your email
+const APP_URL         = 'https://kiemhung95.github.io/trump2026/'; // your GitHub Pages URL
 const SHEET_ID        = '';  // leave blank to use the spreadsheet this script is bound to
-const SECRET_SALT     = 'change_this_to_a_random_string_12345';
+const SECRET_SALT     = 'hoiquananhba';
 // ────────────────────────────────────────────────────────────────────
 
 // ── SHEET NAMES ──────────────────────────────────────────────────────
@@ -20,37 +20,42 @@ const U_ID    = 1, U_NAME = 2, U_EMAIL = 3, U_HASH = 4, U_STATUS = 5, U_CREATED 
 // Picks sheet:  userId | matchId | pick | savedAt
 const P_USER  = 1, P_MATCH = 2, P_PICK = 3, P_SAVED = 4;
 
-
 // ════════════════════════════════════════════════════════════════════
-//  ROUTER — called by the web app
+//  ROUTER — ALL requests via GET to avoid CORS preflight
+//  API calls:       ?action=login&payload={"userId":"x","password":"y"}
+//  Admin approval:  ?action=approve&token=xxx
 // ════════════════════════════════════════════════════════════════════
-function doPost(e) {
+function doGet(e) {
   try {
-    const action = e.parameter.action;
-    const body   = JSON.parse(e.postData.contents || '{}');
+    const action = e.parameter.action || '';
+
+    // Admin approval link — returns an HTML page
+    if (action === 'approve') {
+      return approveUser(e.parameter.token);
+    }
+
+    // All API actions — body is passed as JSON in ?payload=
+    const body = JSON.parse(e.parameter.payload || '{}');
     let result;
 
     switch (action) {
       case 'signup':   result = signup(body);   break;
       case 'login':    result = login(body);    break;
-      case 'getPicks': result = getPicks(body); break;
-      case 'savePick': result = savePick(body); break;
-      default:         result = { success: false, message: 'Unknown action' };
+      case 'getPicks':    result = getPicks(body);    break;
+      case 'savePick':    result = savePick(body);    break;
+      case 'getAllPicks':  result = getAllPicks();      break;
+      default:         result = { success: false, message: 'Unknown action: ' + action };
     }
 
     return jsonResponse(result);
   } catch (err) {
-    return jsonResponse({ success: false, message: err.message });
+    return jsonResponse({ success: false, message: 'Server error: ' + err.message });
   }
 }
 
-// Also handle GET (for the approval link the admin clicks)
-function doGet(e) {
-  const action = e.parameter.action;
-  if (action === 'approve') {
-    return approveUser(e.parameter.token);
-  }
-  return HtmlService.createHtmlOutput('<p>Gaffer\'s Den API</p>');
+// doPost kept as fallback — not used by the frontend
+function doPost(e) {
+  return doGet(e);
 }
 
 
@@ -86,9 +91,9 @@ function signup({ name, userId, email, password }) {
 
   MailApp.sendEmail({
     to: ADMIN_EMAIL,
-    subject: `[Gaffer's Den] New sign-up request from ${name} (${userId})`,
+    subject: `[Hội quán anh ba] New sign-up request from ${name} (${userId})`,
     body:
-      `A new user has requested an account on The Gaffer's Den.\n\n` +
+      `A new user has requested an account on Hoi Quan Anh Ba.\n\n` +
       `Name:    ${name}\n` +
       `User ID: ${userId}\n` +
       `Email:   ${email}\n\n` +
@@ -126,10 +131,10 @@ function approveUser(token) {
       // Email user
       MailApp.sendEmail({
         to: email,
-        subject: `[Gaffer's Den] Your account is approved! ⚽`,
+        subject: `[Hội Quán Anh Ba] Your account is approved! ⚽`,
         body:
           `Hi ${name},\n\n` +
-          `Great news! Your Gaffer's Den account has been approved.\n\n` +
+          `Great news! Your account has been approved.\n\n` +
           `Head over and login now:\n${APP_URL}\n\n` +
           `Your User ID: ${userId}\n\n` +
           `Good luck with your predictions! ⚽`
@@ -219,8 +224,42 @@ function savePick({ userId, matchId, pick }) {
 
 
 // ════════════════════════════════════════════════════════════════════
-//  HELPERS
+//  GET ALL PICKS  (for leaderboard)
+//  Returns: { success: true, picks: { userId: { __name__: 'Display Name', matchId: 'home'|'away', ... } } }
 // ════════════════════════════════════════════════════════════════════
+function getAllPicks() {
+  // Build a userId → displayName map from the Users sheet
+  const userSheet = getSheet(SHEET_USERS);
+  const userRows  = userSheet.getDataRange().getValues();
+  const nameMap   = {};
+  for (let i = 1; i < userRows.length; i++) {
+    const uid  = userRows[i][U_ID   - 1];
+    const name = userRows[i][U_NAME - 1];
+    if (uid) nameMap[uid] = name || uid;
+  }
+
+  // Collect all picks grouped by userId
+  const pickSheet = getSheet(SHEET_PICKS);
+  const pickRows  = pickSheet.getDataRange().getValues();
+  const result    = {};
+
+  for (let i = 1; i < pickRows.length; i++) {
+    const uid     = pickRows[i][P_USER  - 1];
+    const matchId = pickRows[i][P_MATCH - 1];
+    const pick    = pickRows[i][P_PICK  - 1];
+    if (!uid || !matchId || !pick) continue;
+
+    if (!result[uid]) {
+      result[uid] = { __name__: nameMap[uid] || uid };
+    }
+    result[uid][matchId] = pick;
+  }
+
+  return { success: true, picks: result };
+}
+
+
+
 function getSheet(name) {
   const ss = SHEET_ID
     ? SpreadsheetApp.openById(SHEET_ID)

@@ -825,11 +825,12 @@
     .bal-tabs {
       display: flex;
       gap: .4rem;
-      background: rgba(0,0,0,.3);
+      background: rgba(0, 0, 0, .3);
       border-radius: 8px;
       padding: .3rem;
       margin-bottom: 1.2rem;
     }
+
     .bal-tab {
       flex: 1;
       padding: .55rem;
@@ -844,13 +845,21 @@
       cursor: pointer;
       transition: all .2s;
     }
+
     .bal-tab.active {
       background: var(--green);
       color: var(--dark);
       font-weight: 700;
     }
-    .bal-panel { display: none; }
-    .bal-panel.active { display: block; animation: fadeUp .3s ease both; }
+
+    .bal-panel {
+      display: none;
+    }
+
+    .bal-panel.active {
+      display: block;
+      animation: fadeUp .3s ease both;
+    }
 
     /* ── LEADERBOARD ── */
     .leaderboard-table {
@@ -858,6 +867,7 @@
       border-collapse: collapse;
       font-family: 'Barlow Condensed', sans-serif;
     }
+
     .leaderboard-table th {
       font-size: .68rem;
       letter-spacing: .15em;
@@ -867,42 +877,75 @@
       text-align: left;
       border-bottom: 1px solid var(--border);
     }
+
     .leaderboard-table td {
       padding: .65rem .6rem;
-      border-bottom: 1px solid rgba(45,64,56,.5);
+      border-bottom: 1px solid rgba(45, 64, 56, .5);
       font-size: .9rem;
       vertical-align: middle;
     }
-    .leaderboard-table tr:last-child td { border-bottom: none; }
+
+    .leaderboard-table tr:last-child td {
+      border-bottom: none;
+    }
+
     .lb-rank {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.1rem;
       color: var(--muted);
       width: 36px;
     }
-    .lb-rank.gold { color: #ffd740; }
-    .lb-rank.silver { color: #cfd8dc; }
-    .lb-rank.bronze { color: #ff8a65; }
-    .lb-name { font-weight: 600; color: var(--text); }
-    .lb-name.me { color: var(--green); }
+
+    .lb-rank.gold {
+      color: #ffd740;
+    }
+
+    .lb-rank.silver {
+      color: #cfd8dc;
+    }
+
+    .lb-rank.bronze {
+      color: #ff8a65;
+    }
+
+    .lb-name {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .lb-name.me {
+      color: var(--green);
+    }
+
     .lb-pts {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.25rem;
       text-align: right;
     }
-    .lb-pts.pos { color: var(--green); }
-    .lb-pts.neg { color: var(--red); }
-    .lb-pts.zero { color: var(--muted); }
+
+    .lb-pts.pos {
+      color: var(--green);
+    }
+
+    .lb-pts.neg {
+      color: var(--red);
+    }
+
+    .lb-pts.zero {
+      color: var(--muted);
+    }
+
     .lb-detail {
       font-size: .72rem;
       color: var(--muted);
       text-align: right;
     }
+
     .lb-you-badge {
       display: inline-block;
-      background: rgba(0,230,118,.15);
+      background: rgba(0, 230, 118, .15);
       color: var(--green);
-      border: 1px solid rgba(0,230,118,.3);
+      border: 1px solid rgba(0, 230, 118, .3);
       border-radius: 20px;
       font-size: .6rem;
       padding: .05rem .4rem;
@@ -910,6 +953,7 @@
       letter-spacing: .08em;
       vertical-align: middle;
     }
+
     .lb-loading {
       text-align: center;
       padding: 2rem;
@@ -926,6 +970,7 @@
       gap: .5rem;
       margin-bottom: 1.2rem;
     }
+
     .pts-ratio-item {
       background: var(--card);
       border: 1px solid var(--border);
@@ -935,12 +980,14 @@
       justify-content: space-between;
       align-items: center;
     }
+
     .pts-ratio-label {
       font-size: .72rem;
       color: var(--muted);
       font-family: 'Barlow Condensed', sans-serif;
       letter-spacing: .06em;
     }
+
     .pts-ratio-val {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.1rem;
@@ -1256,15 +1303,18 @@
 
         <!-- Report tabs -->
         <div class="bal-tabs">
-          <button class="bal-tab active" id="baltab-personal" onclick="switchBalTab('personal')">&#x1F64B; My Report</button>
-          <button class="bal-tab" id="baltab-leaderboard" onclick="switchBalTab('leaderboard')">&#x1F3C6; Leaderboard</button>
+          <button class="bal-tab active" id="baltab-personal" onclick="switchBalTab('personal')">&#x1F64B; My
+            Report</button>
+          <button class="bal-tab" id="baltab-leaderboard" onclick="switchBalTab('leaderboard')">&#x1F3C6;
+            Leaderboard</button>
         </div>
 
         <!-- Personal panel -->
         <div class="bal-panel active" id="balpanel-personal">
           <div class="balance-hero">
             <div class="balance-label">Points Balance</div>
-            <div class="balance-amount"><span id="bal-points">&#x2013;</span> <span class="balance-unit">pts</span></div>
+            <div class="balance-amount"><span id="bal-points">&#x2013;</span> <span class="balance-unit">pts</span>
+            </div>
           </div>
           <div class="balance-stats">
             <div class="stat-card">
@@ -1312,7 +1362,9 @@
         <!-- Leaderboard panel -->
         <div class="bal-panel" id="balpanel-leaderboard">
           <div id="leaderboard-content">
-            <div class="lb-loading"><div class="spinner" style="margin:0 auto 1rem;"></div>Loading leaderboard...</div>
+            <div class="lb-loading">
+              <div class="spinner" style="margin:0 auto 1rem;"></div>Loading leaderboard...
+            </div>
           </div>
         </div>
       </div>
@@ -1340,7 +1392,7 @@
     // ════════════════════════════════════════════════════
     // CONFIG — replace with your Google Apps Script URL
     // ════════════════════════════════════════════════════
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4TS5XpgiDQty6zDzaddCwRKLPsuYlALdPf_ANvCmsEEPdywO9_2a8sqyz8oY3j8Q5LQ/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwtYOr1xGLZ8hPjFPoEsiqCJVswjwmn5wlUYSg9jij2HYi67qhC7tax4mTyvTXna63wBA/exec';
     // Path to your matches JSON file (relative or absolute URL)
     const MATCHES_JSON_URL = './matches_vongbang.json';
 
@@ -1760,9 +1812,9 @@
       const num = parseInt(matchId.replace(/\D/g, ''), 10);
       if (num >= 103) return 10;
       if (num >= 101) return 5;
-      if (num >= 97)  return 4;
-      if (num >= 89)  return 3;
-      if (num >= 73)  return 2;
+      if (num >= 97) return 4;
+      if (num >= 89) return 3;
+      if (num >= 73) return 2;
       return 1;
     }
 
@@ -1782,6 +1834,8 @@
         } else if (pick === outcome) {
           correct++;
           totalPoints += mult;
+        } else if (outcome === 'draw') {
+          // do nothing
         } else {
           wrong++;
           totalPoints -= mult;
@@ -1839,6 +1893,7 @@
           if (outcome === null) return;
           const mult = getMatchMultiplier(m.id);
           if (pick === outcome) { cor++; pts += mult; }
+          else if (outcome === 'draw') { }
           else { wrg++; pts -= mult; }
         });
         return { uid, name: allPicks[uid].__name__ || uid, pts, cor, wrg };
