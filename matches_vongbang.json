@@ -5,33 +5,33 @@
       "league": "Bảng C - Vòng bảng",
       "home": "Mexico",
       "away": "Nam Phi",
-      "rate": "",
-      "kickoff": "2026-06-12T02:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "rate": "1",
+      "kickoff": "2026-05-12T02:00:00+07:00",
+      "result": "away",
+      "homeScore": 0,
+      "awayScore": 2
     },
     {
       "id": "m002",
       "league": "Bảng A - Vòng bảng",
       "home": "Hàn Quốc",
       "away": "Cộng hòa Czech",
-      "rate": "",
-      "kickoff": "2026-06-12T09:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "rate": "-1",
+      "kickoff": "2026-05-12T09:00:00+07:00",
+      "result": "away",
+      "homeScore": 1,
+      "awayScore": 2
     },
     {
       "id": "m003",
       "league": "Bảng B - Vòng bảng",
       "home": "Canada",
       "away": "Bosnia & Herzegovina",
-      "rate": "",
-      "kickoff": "2026-06-13T02:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "rate": "0",
+      "kickoff": "2026-05-13T02:00:00+07:00",
+      "result": "draw",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "id": "m004",
@@ -797,22 +797,22 @@
       "league": "test1",
       "home": "Đan Mạch",
       "away": "Serbia",
-      "rate": "",
-      "kickoff": "2026-06-28T09:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "rate": "-1",
+      "kickoff": "2026-05-28T09:00:00+07:00",
+      "result": "home",
+      "homeScore": 1,
+      "awayScore": 0
     },
     {
       "id": "m104",
       "league": "test2",
       "home": "Đan",
       "away": "Serbia",
-      "rate": "",
-      "kickoff": "2026-06-28T09:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "rate": "0",
+      "kickoff": "2026-05-28T09:00:00+07:00",
+      "result": "away",
+      "homeScore": 0,
+      "awayScore": 2
     }
   ]
 }
