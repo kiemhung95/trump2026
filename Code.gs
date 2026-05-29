@@ -1,0 +1,288 @@
+// ═══════════════════════════════════════════════════════════════════
+//  THE GAFFER'S DEN — Google Apps Script Backend
+//  Paste this entire file into script.google.com → Deploy as Web App
+// ═══════════════════════════════════════════════════════════════════
+
+// ── CONFIG: fill these in before deploying ──────────────────────────
+const ADMIN_EMAIL     = 'admin@example.com';          // your email
+const APP_URL         = 'https://yourusername.github.io/your-repo/'; // your GitHub Pages URL
+const SHEET_ID        = '';  // leave blank to use the spreadsheet this script is bound to
+const SECRET_SALT     = 'change_this_to_a_random_string_12345';
+// ────────────────────────────────────────────────────────────────────
+
+// ── SHEET NAMES ──────────────────────────────────────────────────────
+const SHEET_USERS   = 'Users';
+const SHEET_PICKS   = 'Picks';
+
+// ── COLUMN INDICES (1-based) ──────────────────────────────────────────
+// Users sheet:  userId | name | email | passwordHash | status | createdAt
+const U_ID    = 1, U_NAME = 2, U_EMAIL = 3, U_HASH = 4, U_STATUS = 5, U_CREATED = 6;
+// Picks sheet:  userId | matchId | pick | savedAt
+const P_USER  = 1, P_MATCH = 2, P_PICK = 3, P_SAVED = 4;
+
+
+// ════════════════════════════════════════════════════════════════════
+//  ROUTER — called by the web app
+// ════════════════════════════════════════════════════════════════════
+function doPost(e) {
+  try {
+    const action = e.parameter.action;
+    const body   = JSON.parse(e.postData.contents || '{}');
+    let result;
+
+    switch (action) {
+      case 'signup':   result = signup(body);   break;
+      case 'login':    result = login(body);    break;
+      case 'getPicks': result = getPicks(body); break;
+      case 'savePick': result = savePick(body); break;
+      default:         result = { success: false, message: 'Unknown action' };
+    }
+
+    return jsonResponse(result);
+  } catch (err) {
+    return jsonResponse({ success: false, message: err.message });
+  }
+}
+
+// Also handle GET (for the approval link the admin clicks)
+function doGet(e) {
+  const action = e.parameter.action;
+  if (action === 'approve') {
+    return approveUser(e.parameter.token);
+  }
+  return HtmlService.createHtmlOutput('<p>Gaffer\'s Den API</p>');
+}
+
+
+// ════════════════════════════════════════════════════════════════════
+//  SIGN UP
+// ════════════════════════════════════════════════════════════════════
+function signup({ name, userId, email, password }) {
+  if (!name || !userId || !email || !password)
+    return { success: false, message: 'All fields are required.' };
+
+  const sheet = getSheet(SHEET_USERS);
+
+  // Check if userId already exists
+  const existing = findUser(userId);
+  if (existing) return { success: false, message: 'User ID already taken.' };
+
+  // Check email
+  const allData = sheet.getDataRange().getValues();
+  for (let i = 1; i < allData.length; i++) {
+    if (allData[i][U_EMAIL - 1] === email)
+      return { success: false, message: 'Email already registered.' };
+  }
+
+  const hash  = hashPassword(password);
+  const token = generateToken(userId + email);
+
+  // Add row with status = 'pending'
+  sheet.appendRow([userId, name, email, hash, 'pending', new Date().toISOString()]);
+
+  // Email admin with approval link
+  const approveLink = ScriptApp.getService().getUrl()
+    + '?action=approve&token=' + encodeURIComponent(token) + '&userId=' + encodeURIComponent(userId);
+
+  MailApp.sendEmail({
+    to: ADMIN_EMAIL,
+    subject: `[Gaffer's Den] New sign-up request from ${name} (${userId})`,
+    body:
+      `A new user has requested an account on The Gaffer's Den.\n\n` +
+      `Name:    ${name}\n` +
+      `User ID: ${userId}\n` +
+      `Email:   ${email}\n\n` +
+      `Click the link below to APPROVE their account:\n${approveLink}\n\n` +
+      `If you do not recognise this request, ignore this email.`
+  });
+
+  // Store token temporarily in user row (append to a helper column or in a separate sheet)
+  // Simple approach: store token in column 7
+  const row = findUserRow(userId);
+  if (row > 0) sheet.getRange(row, 7).setValue(token);
+
+  return { success: true, message: 'Request submitted. Awaiting admin approval.' };
+}
+
+
+// ════════════════════════════════════════════════════════════════════
+//  APPROVE (admin clicks email link)
+// ════════════════════════════════════════════════════════════════════
+function approveUser(token) {
+  const sheet   = getSheet(SHEET_USERS);
+  const allData = sheet.getDataRange().getValues();
+
+  for (let i = 1; i < allData.length; i++) {
+    if (allData[i][6] === token) {  // col 7 (index 6) = token
+      const userId = allData[i][U_ID - 1];
+      const name   = allData[i][U_NAME - 1];
+      const email  = allData[i][U_EMAIL - 1];
+
+      // Set status = 'approved'
+      sheet.getRange(i + 1, U_STATUS).setValue('approved');
+      // Clear token
+      sheet.getRange(i + 1, 7).setValue('');
+
+      // Email user
+      MailApp.sendEmail({
+        to: email,
+        subject: `[Gaffer's Den] Your account is approved! ⚽`,
+        body:
+          `Hi ${name},\n\n` +
+          `Great news! Your Gaffer's Den account has been approved.\n\n` +
+          `Head over and login now:\n${APP_URL}\n\n` +
+          `Your User ID: ${userId}\n\n` +
+          `Good luck with your predictions! ⚽`
+      });
+
+      return HtmlService.createHtmlOutput(
+        `<html><body style="font-family:sans-serif;text-align:center;padding:3rem;background:#0a0f0d;color:#e8f5e9">
+          <h1 style="color:#00e676">✅ Account Approved!</h1>
+          <p>${name} (${userId}) has been approved and notified by email.</p>
+        </body></html>`
+      );
+    }
+  }
+
+  return HtmlService.createHtmlOutput(
+    `<html><body style="font-family:sans-serif;text-align:center;padding:3rem;background:#0a0f0d;color:#e8f5e9">
+      <h1 style="color:#ff1744">❌ Invalid or expired token</h1>
+      <p>This approval link is no longer valid.</p>
+    </body></html>`
+  );
+}
+
+
+// ════════════════════════════════════════════════════════════════════
+//  LOGIN
+// ════════════════════════════════════════════════════════════════════
+function login({ userId, password }) {
+  if (!userId || !password)
+    return { success: false, message: 'User ID and password required.' };
+
+  const user = findUser(userId);
+  if (!user) return { success: false, message: 'User not found.' };
+
+  if (user.status === 'pending')
+    return { success: false, message: 'Your account is awaiting admin approval.' };
+
+  if (user.status !== 'approved')
+    return { success: false, message: 'Account is not active.' };
+
+  if (user.hash !== hashPassword(password))
+    return { success: false, message: 'Incorrect password.' };
+
+  return { success: true, userId: user.userId, name: user.name, email: user.email };
+}
+
+
+// ════════════════════════════════════════════════════════════════════
+//  GET PICKS
+// ════════════════════════════════════════════════════════════════════
+function getPicks({ userId }) {
+  const sheet = getSheet(SHEET_PICKS);
+  const rows  = sheet.getDataRange().getValues();
+  const picks = {};
+
+  for (let i = 1; i < rows.length; i++) {
+    if (rows[i][P_USER - 1] === userId) {
+      picks[rows[i][P_MATCH - 1]] = rows[i][P_PICK - 1];
+    }
+  }
+
+  return { success: true, picks };
+}
+
+
+// ════════════════════════════════════════════════════════════════════
+//  SAVE PICK
+// ════════════════════════════════════════════════════════════════════
+function savePick({ userId, matchId, pick }) {
+  if (!userId || !matchId || !pick)
+    return { success: false, message: 'Missing fields.' };
+
+  const sheet = getSheet(SHEET_PICKS);
+  const rows  = sheet.getDataRange().getValues();
+
+  // Update if exists, else append
+  for (let i = 1; i < rows.length; i++) {
+    if (rows[i][P_USER - 1] === userId && rows[i][P_MATCH - 1] === matchId) {
+      sheet.getRange(i + 1, P_PICK).setValue(pick);
+      sheet.getRange(i + 1, P_SAVED).setValue(new Date().toISOString());
+      return { success: true };
+    }
+  }
+
+  sheet.appendRow([userId, matchId, pick, new Date().toISOString()]);
+  return { success: true };
+}
+
+
+// ════════════════════════════════════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════════════════════════════════════
+function getSheet(name) {
+  const ss = SHEET_ID
+    ? SpreadsheetApp.openById(SHEET_ID)
+    : SpreadsheetApp.getActiveSpreadsheet();
+
+  let sheet = ss.getSheetByName(name);
+  if (!sheet) {
+    sheet = ss.insertSheet(name);
+    // Add headers
+    if (name === SHEET_USERS) {
+      sheet.appendRow(['userId','name','email','passwordHash','status','createdAt','approvalToken']);
+    } else if (name === SHEET_PICKS) {
+      sheet.appendRow(['userId','matchId','pick','savedAt']);
+    }
+  }
+  return sheet;
+}
+
+function findUser(userId) {
+  const sheet   = getSheet(SHEET_USERS);
+  const allData = sheet.getDataRange().getValues();
+  for (let i = 1; i < allData.length; i++) {
+    if (allData[i][U_ID - 1] === userId) {
+      return {
+        userId: allData[i][U_ID - 1],
+        name:   allData[i][U_NAME - 1],
+        email:  allData[i][U_EMAIL - 1],
+        hash:   allData[i][U_HASH - 1],
+        status: allData[i][U_STATUS - 1]
+      };
+    }
+  }
+  return null;
+}
+
+function findUserRow(userId) {
+  const sheet   = getSheet(SHEET_USERS);
+  const allData = sheet.getDataRange().getValues();
+  for (let i = 1; i < allData.length; i++) {
+    if (allData[i][U_ID - 1] === userId) return i + 1;
+  }
+  return -1;
+}
+
+function hashPassword(password) {
+  return Utilities.computeDigest(
+    Utilities.DigestAlgorithm.SHA_256,
+    password + SECRET_SALT,
+    Utilities.Charset.UTF_8
+  ).map(b => ('0' + (b & 0xFF).toString(16)).slice(-2)).join('');
+}
+
+function generateToken(seed) {
+  return Utilities.computeDigest(
+    Utilities.DigestAlgorithm.SHA_256,
+    seed + Date.now() + SECRET_SALT,
+    Utilities.Charset.UTF_8
+  ).map(b => ('0' + (b & 0xFF).toString(16)).slice(-2)).join('').substring(0, 40);
+}
+
+function jsonResponse(data) {
+  return ContentService
+    .createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON);
+}

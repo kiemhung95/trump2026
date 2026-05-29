@@ -767,7 +767,7 @@
 // ════════════════════════════════════════════════════
 // CONFIG — replace with your Google Apps Script URL
 // ════════════════════════════════════════════════════
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxgSiA8ppOExLzxX0w4F58-jTp0xuWSYikmcJa8E9VJUF3VbbrfFNDkqf1MGlb9ksTrkQ/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOOJyzoQ3k7u_8FPUr3PcoVGlAD3vxl-QpFgy9i5shHazAGGWXgqlciEdlqhNFH88CjQ/exec';
 // Path to your matches JSON file (relative or absolute URL)
 const MATCHES_JSON_URL = 'matches.json';
 
@@ -827,15 +827,12 @@ async function handleLogin() {
   const userId   = document.getElementById('login-userid').value.trim();
   const password = document.getElementById('login-password').value;
   if (!userId || !password) { setMsg('login-msg', 'Please fill in all fields.', 'error'); return; }
-
+  setMsg('login-msg', 'enter handle login.', 'error');
   const btn = document.getElementById('login-btn');
   btn.disabled = true; btn.textContent = 'Checking…';
-  setMsg('login-msg', '', '');
 
   try {
     const res = await callScript('login', { userId, password });
-    // to be deleted
-    res.success = true; 
     if (res.success) {
       currentUser = { userId: res.userId, name: res.name, email: res.email };
       saveSession(currentUser);
