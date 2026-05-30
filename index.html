@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚽ Hội quán Anh Ba</title>
+  <title>⚽ PK88</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap"
     rel="stylesheet">
@@ -1199,7 +1199,7 @@
   <div id="page-auth" class="page active">
     <div class="auth-brand">
       <div class="crest">⚽</div>
-      <h1>Hội quán Anh Ba</h1>
+      <h1>PK88</h1>
       <p>Have fun with us!</p>
     </div>
     <div class="auth-box">
@@ -1266,7 +1266,7 @@
   <div id="page-app" class="page">
     <!-- Top Bar -->
     <div class="topbar">
-      <div class="topbar-brand">⚽ Hội Quán Anh Ba <span id="topbar-season"></span></div>
+      <div class="topbar-brand">⚽ PK88 <span id="topbar-season"></span></div>
       <div class="topbar-user" id="topbar-username"></div>
       <button class="btn-logout" onclick="handleLogout()">Logout</button>
     </div>
@@ -1330,30 +1330,30 @@
               <div class="stat-label">Pending</div>
             </div>
           </div>
-          <div class="section-sub" style="margin-bottom:.6rem;">Diem theo vong dau</div>
+          <div class="section-sub" style="margin-bottom:.6rem;">Point rule</div>
           <div class="pts-ratio-grid">
             <div class="pts-ratio-item">
-              <span class="pts-ratio-label">Vong bang (m001-m072)</span>
+              <span class="pts-ratio-label">Group stage</span>
               <span class="pts-ratio-val">+/-1 pt</span>
             </div>
             <div class="pts-ratio-item">
-              <span class="pts-ratio-label">Vong 32 (m073-m088)</span>
+              <span class="pts-ratio-label">Round of 32</span>
               <span class="pts-ratio-val">+/-2 pt</span>
             </div>
             <div class="pts-ratio-item">
-              <span class="pts-ratio-label">Vong 16 (m089-m096)</span>
+              <span class="pts-ratio-label">Round of 16</span>
               <span class="pts-ratio-val">+/-3 pt</span>
             </div>
             <div class="pts-ratio-item">
-              <span class="pts-ratio-label">Tu ket (m097-m100)</span>
+              <span class="pts-ratio-label">Quarter Final</span>
               <span class="pts-ratio-val">+/-4 pt</span>
             </div>
             <div class="pts-ratio-item">
-              <span class="pts-ratio-label">Ban ket (m101-m102)</span>
+              <span class="pts-ratio-label">Semi Final</span>
               <span class="pts-ratio-val">+/-5 pt</span>
             </div>
             <div class="pts-ratio-item">
-              <span class="pts-ratio-label">Chung ket (m103-m104)</span>
+              <span class="pts-ratio-label">Final / Third-place match</span>
               <span class="pts-ratio-val">+/-10 pt</span>
             </div>
           </div>
@@ -1457,10 +1457,10 @@
         <span class="rate-team-label rate-away-label">${m.away}</span>
       </div>
       <div class="rate-bar">
-        <div class="rate-seg rate-home" style="width:${hw}%" title="${m.home} — kèo: ${h}">
+        <div class="rate-seg rate-home" style="width:${hw}%" title="${m.home} — rate: ${h}">
           <span class="rate-odds">${h}</span>
         </div>
-        <div class="rate-seg rate-away" style="width:${aw}%" title="${m.away} — kèo: ${a}">
+        <div class="rate-seg rate-away" style="width:${aw}%" title="${m.away} — rate: ${a}">
           <span class="rate-odds">${a}</span>
         </div>
       </div>
@@ -1655,7 +1655,7 @@
       </button>
     </div>
     <div class="match-save-row">
-      ${m.rate ? `<span class="save-hint" style="margin-right: auto;">Tỷ lệ: <strong style="color:var(--gold)">${m.rate}</strong></span>` : ''}
+      ${m.rate ? `<span class="save-hint" style="margin-right: auto;">Rate: <strong style="color:var(--gold)">${m.rate}</strong></span>` : ''}
       ${pick ? `<span class="save-hint" style="${m.rate ? '' : 'margin-left: auto;'}">Picked: <strong>${pick === 'home' ? m.home : m.away}</strong></span>` : `<span class="save-hint" style="${m.rate ? '' : 'margin-left: auto;'}">No pick yet</span>`}
       ${!locked ? `<button class="btn-save" id="save-${m.id}" onclick="confirmSave('${m.id}')" ${!pick ? 'disabled' : ''}>Save</button>` : ''}
     </div>
@@ -1696,7 +1696,7 @@
     function computeOutcome(m) {
       if (m.homeScore == null || m.awayScore == null) return null;
       const rate = m.rate !== '' && m.rate != null ? parseFloat(m.rate) : 0;
-      const adjHome = parseFloat(m.homeScore) - rate;
+      const adjHome = parseFloat(m.homeScore) + rate;
       const away = parseFloat(m.awayScore);
       if (adjHome > away) return 'home';
       if (adjHome < away) return 'away';
@@ -1712,7 +1712,7 @@
       const kickedOff = allMatches.filter(m => isKickoffPassed(m.kickoff));
 
       if (!kickedOff.length) {
-        container.innerHTML = `<div class="empty-state"><div class="empty-icon">🕐</div><div class="empty-text">Chưa có trận đấu nào — quay lại sau!</div></div>`;
+        container.innerHTML = `<div class="empty-state"><div class="empty-icon">🕐</div><div class="empty-text">No matches available yet — check back later!</div></div>`;
         return;
       }
 
@@ -1745,16 +1745,16 @@
               : '';
 
         const badgeText = {
-          correct: '✅ Đúng',
-          wrong: '❌ Sai',
-          draw: '⚖️ Hòa',
-          pending: '⏳ Chờ kết quả',
-          nopick: '— Không chọn'
+          correct: '✅ Correct',
+          wrong: '❌ Wrong',
+          draw: '⚖️ Draw',
+          pending: '⏳ Pending',
+          nopick: '— No pick'
         }[status];
 
         const pickLabel = pick
-          ? (pick === 'home' ? m.home : pick === 'away' ? m.away : 'Hòa')
-          : 'Không chọn';
+          ? (pick === 'home' ? m.home : pick === 'away' ? m.away : 'Draw')
+          : 'No pick';
 
         // Raw scores
         const hs = m.homeScore ?? '–';
@@ -1764,11 +1764,11 @@
         const rate = m.rate !== '' && m.rate != null ? parseFloat(m.rate) : null;
         let adjRow = '';
         if (rate !== null && !isNaN(rate) && m.homeScore != null) {
-          const adjHome = parseFloat(m.homeScore) - rate;
+          const adjHome = parseFloat(m.homeScore) + rate;
           const rateSign = rate >= 0 ? `+${rate}` : `${rate}`;
           adjRow = `
       <div class="result-adj-score">
-        Tỷ lệ kèo: <span>${rateSign}</span> → Tỉ số hiệu chỉnh: <span>${adjHome % 1 === 0 ? adjHome : adjHome.toFixed(2)} – ${as}</span>
+        Rate: <span>${rateSign}</span> → Adjusted Score: <span>${adjHome % 1 === 0 ? adjHome : adjHome.toFixed(2)} – ${as}</span>
       </div>`;
         }
 
@@ -1799,7 +1799,7 @@
         </div>
       </div>
       ${adjRow}
-      <div class="result-my-pick">Dự đoán của bạn: <strong>${pickLabel}</strong></div>
+      <div class="result-my-pick">Your pick: <strong>${pickLabel}</strong></div>
     </div>`;
       }).join('');
     }

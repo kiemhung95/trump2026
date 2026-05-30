@@ -2,7 +2,7 @@
   "matches": [
     {
       "id": "m001",
-      "league": "Bảng C - Vòng bảng",
+      "league": "Group C - Group stage",
       "home": "Mexico",
       "away": "Nam Phi",
       "rate": "",
@@ -13,7 +13,7 @@
     },
     {
       "id": "m002",
-      "league": "Bảng A - Vòng bảng",
+      "league": "Group A - Group stage",
       "home": "Hàn Quốc",
       "away": "Cộng hòa Czech",
       "rate": "",
@@ -24,7 +24,7 @@
     },
     {
       "id": "m003",
-      "league": "Bảng B - Vòng bảng",
+      "league": "Group B - Group stage",
       "home": "Canada",
       "away": "Bosnia & Herzegovina",
       "rate": "",
@@ -35,7 +35,7 @@
     },
     {
       "id": "m004",
-      "league": "Bảng E - Vòng bảng",
+      "league": "Group E - Group stage",
       "home": "Mỹ",
       "away": "Paraguay",
       "rate": "",
@@ -46,7 +46,7 @@
     },
     {
       "id": "m005",
-      "league": "Bảng A - Vòng bảng",
+      "league": "Group A - Group stage",
       "home": "Qatar",
       "away": "Thụy Sỹ",
       "rate": "",
@@ -57,7 +57,7 @@
     },
     {
       "id": "m006",
-      "league": "Bảng C - Vòng bảng",
+      "league": "Group C - Group stage",
       "home": "Brazil",
       "away": "Morocco",
       "rate": "",
@@ -68,7 +68,7 @@
     },
     {
       "id": "m007",
-      "league": "Bảng C - Vòng bảng",
+      "league": "Group C - Group stage",
       "home": "Haiti",
       "away": "Scotland",
       "rate": "",
@@ -79,7 +79,7 @@
     },
     {
       "id": "m008",
-      "league": "Bảng E - Vòng bảng",
+      "league": "Group E - Group stage",
       "home": "Australia",
       "away": "Thổ Nhĩ Kỳ",
       "rate": "",
@@ -90,7 +90,7 @@
     },
     {
       "id": "m009",
-      "league": "Bảng D - Vòng bảng",
+      "league": "Group D - Group stage",
       "home": "Đức",
       "away": "Curacao",
       "rate": "",
@@ -101,7 +101,7 @@
     },
     {
       "id": "m010",
-      "league": "Bảng F - Vòng bảng",
+      "league": "Group F - Group stage",
       "home": "Hà Lan",
       "away": "Nhật Bản",
       "rate": "",
@@ -112,7 +112,7 @@
     },
     {
       "id": "m011",
-      "league": "Bảng D - Vòng bảng",
+      "league": "Group D - Group stage",
       "home": "Bờ Biển Ngà",
       "away": "Ecuador",
       "rate": "",
@@ -123,7 +123,7 @@
     },
     {
       "id": "m012",
-      "league": "Bảng F - Vòng bảng",
+      "league": "Group F - Group stage",
       "home": "Thụy Điển",
       "away": "Tunisia",
       "rate": "",
@@ -134,7 +134,7 @@
     },
     {
       "id": "m013",
-      "league": "Bảng I - Vòng bảng",
+      "league": "Group I - Group stage",
       "home": "Tây Ban Nha",
       "away": "Cape Verde",
       "rate": "",
@@ -145,7 +145,7 @@
     },
     {
       "id": "m014",
-      "league": "Bảng G - Vòng bảng",
+      "league": "Group G - Group stage",
       "home": "Bỉ",
       "away": "Ai Cập",
       "rate": "",
@@ -156,7 +156,7 @@
     },
     {
       "id": "m015",
-      "league": "Bảng I - Vòng bảng",
+      "league": "Group I - Group stage",
       "home": "Ả Rập Xê Út",
       "away": "Uruguay",
       "rate": "",
@@ -167,7 +167,7 @@
     },
     {
       "id": "m016",
-      "league": "Bảng G - Vòng bảng",
+      "league": "Group G - Group stage",
       "home": "Iran",
       "away": "New Zealand",
       "rate": "",
@@ -178,7 +178,7 @@
     },
     {
       "id": "m017",
-      "league": "Bảng H - Vòng bảng",
+      "league": "Group H - Group stage",
       "home": "Pháp",
       "away": "Senegal",
       "rate": "",
@@ -189,7 +189,7 @@
     },
     {
       "id": "m018",
-      "league": "Bảng H - Vòng bảng",
+      "league": "Group H - Group stage",
       "home": "Iraq",
       "away": "Na Uy",
       "rate": "",
@@ -200,7 +200,7 @@
     },
     {
       "id": "m019",
-      "league": "Bảng K - Vòng bảng",
+      "league": "Group K - Group stage",
       "home": "Argentina",
       "away": "Algeria",
       "rate": "",
@@ -211,7 +211,7 @@
     },
     {
       "id": "m020",
-      "league": "Bảng K - Vòng bảng",
+      "league": "Group K - Group stage",
       "home": "Áo",
       "away": "Jordan",
       "rate": "",
@@ -222,7 +222,7 @@
     },
     {
       "id": "m021",
-      "league": "Bảng J - Vòng bảng",
+      "league": "Group J - Group stage",
       "home": "Bồ Đào Nha",
       "away": "CHDC Congo",
       "rate": "",
@@ -233,7 +233,7 @@
     },
     {
       "id": "m022",
-      "league": "Bảng L - Vòng bảng",
+      "league": "Group L - Group stage",
       "home": "Anh",
       "away": "Croatia",
       "rate": "",
@@ -244,7 +244,7 @@
     },
     {
       "id": "m023",
-      "league": "Bảng L - Vòng bảng",
+      "league": "Group L - Group stage",
       "home": "Ghana",
       "away": "Panama",
       "rate": "",
@@ -255,7 +255,7 @@
     },
     {
       "id": "m024",
-      "league": "Bảng J - Vòng bảng",
+      "league": "Group J - Group stage",
       "home": "Uzbekistan",
       "away": "Colombia",
       "rate": "",
@@ -266,7 +266,7 @@
     },
     {
       "id": "m025",
-      "league": "Bảng A - Vòng bảng",
+      "league": "Group A - Group stage",
       "home": "CH Czech",
       "away": "Nam Phi",
       "rate": "",
@@ -277,7 +277,7 @@
     },
     {
       "id": "m026",
-      "league": "Bảng A - Vòng bảng",
+      "league": "Group A - Group stage",
       "home": "Thụy Sỹ",
       "away": "Bosnia & Herzegovina",
       "rate": "",
@@ -288,7 +288,7 @@
     },
     {
       "id": "m027",
-      "league": "Bảng B - Vòng bảng",
+      "league": "Group B - Group stage",
       "home": "Canada",
       "away": "Qatar",
       "rate": "",
@@ -299,7 +299,7 @@
     },
     {
       "id": "m028",
-      "league": "Bảng C - Vòng bảng",
+      "league": "Group C - Group stage",
       "home": "Mexico",
       "away": "Hàn Quốc",
       "rate": "",
@@ -310,7 +310,7 @@
     },
     {
       "id": "m029",
-      "league": "Bảng E - Vòng bảng",
+      "league": "Group E - Group stage",
       "home": "Mỹ",
       "away": "Australia",
       "rate": "",
@@ -321,7 +321,7 @@
     },
     {
       "id": "m030",
-      "league": "Bảng C - Vòng bảng",
+      "league": "Group C - Group stage",
       "home": "Scotland",
       "away": "Morocco",
       "rate": "",
@@ -332,7 +332,7 @@
     },
     {
       "id": "m031",
-      "league": "Bảng C - Vòng bảng",
+      "league": "Group C - Group stage",
       "home": "Brazil",
       "away": "Haiti",
       "rate": "",
@@ -343,7 +343,7 @@
     },
     {
       "id": "m032",
-      "league": "Bảng E - Vòng bảng",
+      "league": "Group E - Group stage",
       "home": "Thổ Nhĩ Kỳ",
       "away": "Paraguay",
       "rate": "",
@@ -354,7 +354,7 @@
     },
     {
       "id": "m033",
-      "league": "Bảng F - Vòng bảng",
+      "league": "Group F - Group stage",
       "home": "Hà Lan",
       "away": "Thụy Điển",
       "rate": "",
@@ -365,7 +365,7 @@
     },
     {
       "id": "m034",
-      "league": "Bảng D - Vòng bảng",
+      "league": "Group D - Group stage",
       "home": "Đức",
       "away": "Bờ Biển Ngà",
       "rate": "",
@@ -376,7 +376,7 @@
     },
     {
       "id": "m035",
-      "league": "Bảng D - Vòng bảng",
+      "league": "Group D - Group stage",
       "home": "Ecuador",
       "away": "Curacao",
       "rate": "",
@@ -387,7 +387,7 @@
     },
     {
       "id": "m036",
-      "league": "Bảng F - Vòng bảng",
+      "league": "Group F - Group stage",
       "home": "Tunisia",
       "away": "Nhật Bản",
       "rate": "",
@@ -398,7 +398,7 @@
     },
     {
       "id": "m037",
-      "league": "Bảng I - Vòng bảng",
+      "league": "Group I - Group stage",
       "home": "Tây Ban Nha",
       "away": "Ả Rập Xê Út",
       "rate": "",
@@ -409,7 +409,7 @@
     },
     {
       "id": "m038",
-      "league": "Bảng G - Vòng bảng",
+      "league": "Group G - Group stage",
       "home": "Bỉ",
       "away": "Iran",
       "rate": "",
@@ -420,7 +420,7 @@
     },
     {
       "id": "m039",
-      "league": "Bảng I - Vòng bảng",
+      "league": "Group I - Group stage",
       "home": "Uruguay",
       "away": "Cape Verde",
       "rate": "",
@@ -431,7 +431,7 @@
     },
     {
       "id": "m040",
-      "league": "Bảng G - Vòng bảng",
+      "league": "Group G - Group stage",
       "home": "New Zealand",
       "away": "Ai Cập",
       "rate": "",
@@ -442,7 +442,7 @@
     },
     {
       "id": "m041",
-      "league": "Bảng K - Vòng bảng",
+      "league": "Group K - Group stage",
       "home": "Argentina",
       "away": "Áo",
       "rate": "",
@@ -453,7 +453,7 @@
     },
     {
       "id": "m042",
-      "league": "Bảng H - Vòng bảng",
+      "league": "Group H - Group stage",
       "home": "Pháp",
       "away": "Iraq",
       "rate": "",
@@ -464,7 +464,7 @@
     },
     {
       "id": "m043",
-      "league": "Bảng H - Vòng bảng",
+      "league": "Group H - Group stage",
       "home": "Na Uy",
       "away": "Senegal",
       "rate": "",
@@ -475,7 +475,7 @@
     },
     {
       "id": "m044",
-      "league": "Bảng K - Vòng bảng",
+      "league": "Group K - Group stage",
       "home": "Jordan",
       "away": "Algeria",
       "rate": "",
@@ -486,7 +486,7 @@
     },
     {
       "id": "m045",
-      "league": "Bảng J - Vòng bảng",
+      "league": "Group J - Group stage",
       "home": "Bồ Đào Nha",
       "away": "Uzbekistan",
       "rate": "",
@@ -497,7 +497,7 @@
     },
     {
       "id": "m046",
-      "league": "Bảng L - Vòng bảng",
+      "league": "Group L - Group stage",
       "home": "Anh",
       "away": "Ghana",
       "rate": "",
@@ -508,7 +508,7 @@
     },
     {
       "id": "m047",
-      "league": "Bảng L - Vòng bảng",
+      "league": "Group L - Group stage",
       "home": "Panama",
       "away": "Croatia",
       "rate": "",
@@ -519,7 +519,7 @@
     },
     {
       "id": "m048",
-      "league": "Bảng J - Vòng bảng",
+      "league": "Group J - Group stage",
       "home": "Colombia",
       "away": "CHDC Congo",
       "rate": "",
@@ -530,7 +530,7 @@
     },
     {
       "id": "m049",
-      "league": "Bảng A - Lượt cuối",
+      "league": "Group A - Group stage",
       "home": "Bosnia & Herzegovina",
       "away": "Qatar",
       "rate": "",
@@ -541,7 +541,7 @@
     },
     {
       "id": "m050",
-      "league": "Bảng A - Lượt cuối",
+      "league": "Group A - Group stage",
       "home": "Thụy Sỹ",
       "away": "Canada",
       "rate": "",
@@ -552,7 +552,7 @@
     },
     {
       "id": "m051",
-      "league": "Bảng B - Lượt cuối",
+      "league": "Group B - Group stage",
       "home": "Morocco",
       "away": "Haiti",
       "rate": "",
@@ -563,7 +563,7 @@
     },
     {
       "id": "m052",
-      "league": "Bảng B - Lượt cuối",
+      "league": "Group B - Group stage",
       "home": "Scotland",
       "away": "Brazil",
       "rate": "",
@@ -574,7 +574,7 @@
     },
     {
       "id": "m053",
-      "league": "Bảng C - Lượt cuối",
+      "league": "Group C - Group stage",
       "home": "CH Czech",
       "away": "Mexico",
       "rate": "",
@@ -585,7 +585,7 @@
     },
     {
       "id": "m054",
-      "league": "Bảng C - Lượt cuối",
+      "league": "Group C - Group stage",
       "home": "Nam Phi",
       "away": "Hàn Quốc",
       "rate": "",
@@ -596,7 +596,7 @@
     },
     {
       "id": "m055",
-      "league": "Bảng D - Lượt cuối",
+      "league": "Group D - Group stage",
       "home": "Curacao",
       "away": "Bờ Biển Ngà",
       "rate": "",
@@ -607,7 +607,7 @@
     },
     {
       "id": "m056",
-      "league": "Bảng D - Lượt cuối",
+      "league": "Group D - Group stage",
       "home": "Ecuador",
       "away": "Đức",
       "rate": "",
@@ -618,7 +618,7 @@
     },
     {
       "id": "m057",
-      "league": "Bảng F - Lượt cuối",
+      "league": "Group F - Group stage",
       "home": "Nhật Bản",
       "away": "Thụy Điển",
       "rate": "",
@@ -629,7 +629,7 @@
     },
     {
       "id": "m058",
-      "league": "Bảng F - Lượt cuối",
+      "league": "Group F - Group stage",
       "home": "Tunisia",
       "away": "Hà Lan",
       "rate": "",
@@ -640,7 +640,7 @@
     },
     {
       "id": "m059",
-      "league": "Bảng E - Lượt cuối",
+      "league": "Group E - Group stage",
       "home": "Paraguay",
       "away": "Australia",
       "rate": "",
@@ -651,7 +651,7 @@
     },
     {
       "id": "m060",
-      "league": "Bảng E - Lượt cuối",
+      "league": "Group E - Group stage",
       "home": "Thổ Nhĩ Kỳ",
       "away": "Mỹ",
       "rate": "",
@@ -662,7 +662,7 @@
     },
     {
       "id": "m061",
-      "league": "Bảng H - Lượt cuối",
+      "league": "Group H - Group stage",
       "home": "Na Uy",
       "away": "Pháp",
       "rate": "",
@@ -673,7 +673,7 @@
     },
     {
       "id": "m062",
-      "league": "Bảng H - Lượt cuối",
+      "league": "Group H - Group stage",
       "home": "Senegal",
       "away": "Iraq",
       "rate": "",
@@ -684,7 +684,7 @@
     },
     {
       "id": "m063",
-      "league": "Bảng I - Lượt cuối",
+      "league": "Group I - Group stage",
       "home": "Cape Verde",
       "away": "Ả Rập Xê Út",
       "rate": "",
@@ -695,7 +695,7 @@
     },
     {
       "id": "m064",
-      "league": "Bảng I - Lượt cuối",
+      "league": "Group I - Group stage",
       "home": "Uruguay",
       "away": "Tây Ban Nha",
       "rate": "",
@@ -706,7 +706,7 @@
     },
     {
       "id": "m065",
-      "league": "Bảng G - Lượt cuối",
+      "league": "Group G - Group stage",
       "home": "Ai Cập",
       "away": "Iran",
       "rate": "",
@@ -717,7 +717,7 @@
     },
     {
       "id": "m066",
-      "league": "Bảng G - Lượt cuối",
+      "league": "Group G - Group stage",
       "home": "New Zealand",
       "away": "Bỉ",
       "rate": "",
@@ -728,7 +728,7 @@
     },
     {
       "id": "m067",
-      "league": "Bảng L - Lượt cuối",
+      "league": "Group L - Group stage",
       "home": "Croatia",
       "away": "Ghana",
       "rate": "",
@@ -739,7 +739,7 @@
     },
     {
       "id": "m068",
-      "league": "Bảng L - Lượt cuối",
+      "league": "Group L - Group stage",
       "home": "Panama",
       "away": "Anh",
       "rate": "",
@@ -750,7 +750,7 @@
     },
     {
       "id": "m069",
-      "league": "Bảng J - Lượt cuối",
+      "league": "Group J - Group stage",
       "home": "Colombia",
       "away": "Bồ Đào Nha",
       "rate": "",
@@ -761,7 +761,7 @@
     },
     {
       "id": "m070",
-      "league": "Bảng J - Lượt cuối",
+      "league": "Group J - Group stage",
       "home": "CHDC Congo",
       "away": "Uzbekistan",
       "rate": "",
@@ -772,7 +772,7 @@
     },
     {
       "id": "m071",
-      "league": "Bảng K - Lượt cuối",
+      "league": "Group K - Group stage",
       "home": "Algeria",
       "away": "Áo",
       "rate": "",
@@ -783,7 +783,7 @@
     },
     {
       "id": "m072",
-      "league": "Bảng K - Lượt cuối",
+      "league": "Group K - Group stage",
       "home": "Jordan",
       "away": "Argentina",
       "rate": "",
