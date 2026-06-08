@@ -224,6 +224,28 @@ function savePick({ userId, matchId, pick }) {
 
 
 // ════════════════════════════════════════════════════════════════════
+//  REMOVE PICK  — deletes the row entirely so the user has no pick
+// ════════════════════════════════════════════════════════════════════
+function removePick({ userId, matchId }) {
+  if (!userId || !matchId)
+    return { success: false, message: 'Missing fields.' };
+
+  const sheet = getSheet(SHEET_PICKS);
+  const rows  = sheet.getDataRange().getValues();
+
+  for (let i = rows.length - 1; i >= 1; i--) {
+    if (rows[i][P_USER - 1] === userId && rows[i][P_MATCH - 1] === matchId) {
+      sheet.deleteRow(i + 1);
+      return { success: true };
+    }
+  }
+
+  // Row didn't exist — that's fine, pick is already gone
+  return { success: true };
+}
+
+
+// ════════════════════════════════════════════════════════════════════
 //  GET ALL PICKS  (for leaderboard)
 //  Returns: { success: true, picks: { userId: { __name__: 'Display Name', matchId: 'home'|'away', ... } } }
 // ════════════════════════════════════════════════════════════════════

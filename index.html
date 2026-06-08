@@ -1392,7 +1392,7 @@
     // ════════════════════════════════════════════════════
     // CONFIG — replace with your Google Apps Script URL
     // ════════════════════════════════════════════════════
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwtYOr1xGLZ8hPjFPoEsiqCJVswjwmn5wlUYSg9jij2HYi67qhC7tax4mTyvTXna63wBA/exec';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyliX1Xk2rxI_dhy-ecq99DQ3cUaxYD63d_I9gfzFUJgflB5psRhpLcY7MB4HjyeJWhng/exec';
     // Path to your matches JSON file (relative or absolute URL)
     const MATCHES_JSON_URL = './matches_vongbang.json';
 
@@ -1593,7 +1593,13 @@
     async function loadUserPicks() {
       try {
         const res = await callScript('getPicks', { userId: currentUser.userId });
-        if (res.success) userPicks = res.picks || {};
+        if (res.success) {
+          userPicks = res.picks || {};
+          // Mirror saved state so buildMatchCard can detect pending-remove
+          Object.keys(userPicks).forEach(k => {
+            userPicks['__saved__' + k] = userPicks[k];
+          });
+        }
       } catch (e) {
         userPicks = {};
       }
@@ -1610,9 +1616,31 @@
         });
         if (res.success) {
           userPicks[matchId] = pick;
+          userPicks['__saved__' + matchId] = pick;
           showToast('Pick saved ✓');
         } else {
           showToast(res.message || 'Could not save pick.', 'error');
+        }
+      } catch (e) {
+        showToast('Connection error.', 'error');
+      }
+    }
+
+    // ════════════════════════════════════════════════════
+    // REMOVE PICK
+    // ════════════════════════════════════════════════════
+    async function removePick(matchId) {
+      try {
+        const res = await callScript('removePick', {
+          userId: currentUser.userId,
+          matchId
+        });
+        if (res.success) {
+          delete userPicks[matchId];
+          delete userPicks['__saved__' + matchId];
+          showToast('Pick removed ✓');
+        } else {
+          showToast(res.message || 'Could not remove pick.', 'error');
         }
       } catch (e) {
         showToast('Connection error.', 'error');
@@ -1636,8 +1664,32 @@
 
     function buildMatchCard(m) {
       const locked = isKickoffPassed(m.kickoff);
-      const pick = userPicks[m.id] || '';
+      const pick = userPicks[m.id] || null;
+      // savedPick: what's actually on the server — tracked in userPicks after any save/remove
+      // pendingRemove: user had a pick, toggled it off, hasn't saved yet
+      const savedPick = userPicks['__saved__' + m.id] !== undefined
+        ? userPicks['__saved__' + m.id]
+        : pick; // fallback on first load
+      const pendingRemove = (savedPick && !pick);
       const timeStr = m.kickoff ? formatKickoff(m.kickoff) : 'TBD';
+
+      let saveBtn = '';
+      if (!locked) {
+        if (pendingRemove) {
+          saveBtn = `<button class="btn-save" id="save-${m.id}" onclick="confirmSave('${m.id}')" style="background:var(--red);color:#fff;">Remove</button>`;
+        } else {
+          saveBtn = `<button class="btn-save" id="save-${m.id}" onclick="confirmSave('${m.id}')" ${!pick ? 'disabled' : ''}>Save</button>`;
+        }
+      }
+
+      let pickHint = '';
+      if (pendingRemove) {
+        pickHint = `<span class="save-hint" style="${m.rate ? '' : 'margin-left:auto;'}">Removing: <strong style="color:var(--red)">${savedPick === 'home' ? m.home : m.away}</strong></span>`;
+      } else if (pick) {
+        pickHint = `<span class="save-hint" style="${m.rate ? '' : 'margin-left:auto;'}">Picked: <strong>${pick === 'home' ? m.home : m.away}</strong></span>`;
+      } else {
+        pickHint = `<span class="save-hint" style="${m.rate ? '' : 'margin-left:auto;'}">No pick yet</span>`;
+      }
 
       return `
   <div class="match-card" id="mc-${m.id}">
@@ -1656,14 +1708,18 @@
     </div>
     <div class="match-save-row">
       ${m.rate ? `<span class="save-hint" style="margin-right: auto;">Rate: <strong style="color:var(--gold)">${m.rate}</strong></span>` : ''}
-      ${pick ? `<span class="save-hint" style="${m.rate ? '' : 'margin-left: auto;'}">Picked: <strong>${pick === 'home' ? m.home : m.away}</strong></span>` : `<span class="save-hint" style="${m.rate ? '' : 'margin-left: auto;'}">No pick yet</span>`}
-      ${!locked ? `<button class="btn-save" id="save-${m.id}" onclick="confirmSave('${m.id}')" ${!pick ? 'disabled' : ''}>Save</button>` : ''}
+      ${pickHint}
+      ${saveBtn}
     </div>
   </div>`;
     }
 
     function selectPick(matchId, choice) {
-      userPicks[matchId] = choice;
+      if (userPicks[matchId] === choice) {
+        userPicks[matchId] = null;
+      } else {
+        userPicks[matchId] = choice;
+      }
       // re-render just this card
       const match = allMatches.find(m => m.id === matchId);
       if (!match) return;
@@ -1672,11 +1728,16 @@
     }
 
     async function confirmSave(matchId) {
-      const pick = userPicks[matchId];
-      if (!pick) return;
+      const pick = userPicks[matchId] || null;
       const btn = document.getElementById('save-' + matchId);
       if (btn) { btn.disabled = true; btn.textContent = '…'; }
-      await savePick(matchId, pick);
+
+      if (pick) {
+        await savePick(matchId, pick);
+      } else {
+        await removePick(matchId);
+      }
+
       // re-render card
       const match = allMatches.find(m => m.id === matchId);
       if (match) {
