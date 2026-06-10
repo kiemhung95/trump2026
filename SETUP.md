@@ -5,7 +5,7 @@
 |------|---------|
 | `index.html` | The entire frontend — deploy this to GitHub Pages |
 | `Code.gs` | Google Apps Script backend — handles auth, emails, data |
-| `matches.json` | Your match data — update this for each matchday |
+| `matches_<xx>.json` | Your match data — update this for each matchday |
 
 ---
 
@@ -20,7 +20,7 @@
 
 4. At the top of `Code.gs`, fill in your config:
    ```js
-   const ADMIN_EMAIL = 'your@email.com';      // where admin approval emails go
+   const ADMIN_EMAIL = 'your@email.com';      // where admin approval emails go, admin needs to click the link that is sent by the system to approve the user account creation
    const APP_URL     = 'https://yourusername.github.io/your-repo/';
    const SECRET_SALT = 'some_random_secret_string_change_this';
    ```
@@ -52,6 +52,8 @@ const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
 
 Replace `YOUR_APPS_SCRIPT_URL_HERE` with your Web App URL from Step 2.
 
+Replace `MATCHES_JSON_URL` with the corresponding `json` file
+
 ---
 
 ## Step 4 — Deploy to GitHub Pages
@@ -64,6 +66,13 @@ Replace `YOUR_APPS_SCRIPT_URL_HERE` with your Web App URL from Step 2.
 4. Set source to **main branch / root**.
 5. GitHub will give you a URL like `https://yourusername.github.io/gaffers-den/`.
 6. Update `APP_URL` in `Code.gs` to match, then **re-deploy** the Apps Script.
+
+Note: follow these steps to **re-deploy**:
+1. Click **Deploy > Manage deployments**.
+2. Select your active deployment and click the **Pencil (Edit)** icon.
+3. Click the **Version** dropdown menu and select **New version**.
+4. Click **Deploy** to push the fresh modifications live without changing your original URL or Deployment ID.
+5. Double check the **APPS_SCRIPT_URL** with the **App Script URL**, should unchange.
 
 ---
 
@@ -87,17 +96,16 @@ Edit `matches.json` to add/update matches. The schema is:
   "matches": [
     {
       "id": "m001",             ← unique ID (never change once set)
-      "league": "Premier League",
-      "home": "Arsenal",
-      "away": "Chelsea",
-      "homeCrest": "🔴",        ← emoji or leave blank
-      "awayCrest": "🔵",
+      "league": "Group C - Group stage",
+      "home": "Mexico",
+      "away": "South Africa",
+      "rate": "",        ← update the match rate
       "kickoff": "2025-08-16T15:00:00+01:00",  ← ISO 8601 with timezone
       
-      ← Add these fields when a match is finished:
-      "result": "home",         ← "home", "away", or "draw"
-      "homeScore": 2,
-      "awayScore": 1
+      ← update these fields when a match is finished:
+      "result": "",      ← put anything here, !blank is fine
+      "homeScore": null,
+      "awayScore": null
     }
   ]
 }
@@ -122,22 +130,24 @@ The Apps Script will automatically create two sheets:
 | userId | matchId | pick | savedAt |
 |--------|---------|------|---------|
 
-- `pick` is `home`, `away`, or `draw`.
+- `pick` is `home` or `away`
 
 ---
 
 ## Points / Balance Logic
 
-Currently: **1 point per correct prediction**.
+Currently: 
+- If the result is `draw` -> nothing change
+- If the result is `correct` or `wrong` -> Point rules:
 
-To change the scoring, edit the `renderBalance()` function in `index.html`:
-
-```js
-// Default: 1 point per correct pick
-document.getElementById('bal-points').textContent = correct;
-```
-
-You can replace this with any formula, e.g. `correct * 3 - wrong * 1`.
+| Stage | Point |
+|--------|---------|
+| Group stage | +/-1 pt |
+| Round of 32 | +/-2 pt |
+| Round of 16 | +/-3 pt |
+| Quarter Final | +/-4 pt |
+| Semi Final | +/-5 pt |
+| Final / Third-place match | +/-10 pt |
 
 ---
 
