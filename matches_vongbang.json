@@ -1,4 +1,4 @@
-﻿{
+{
   "matches": [
     {
       "id": "m001",
@@ -7,9 +7,9 @@
       "away": "South Africa",
       "rate": "-1",
       "kickoff": "2026-06-12T02:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 2,
+      "awayScore": 0
     },
     {
       "id": "m002",
