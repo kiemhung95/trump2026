@@ -39,12 +39,13 @@ function doGet(e) {
     let result;
 
     switch (action) {
-      case 'signup':   result = signup(body);   break;
-      case 'login':    result = login(body);    break;
-      case 'getPicks':    result = getPicks(body);    break;
-      case 'savePick':    result = savePick(body);    break;
-      case 'getAllPicks':  result = getAllPicks();      break;
-      default:         result = { success: false, message: 'Unknown action: ' + action };
+      case 'signup':          result = signup(body);          break;
+      case 'login':           result = login(body);           break;
+      case 'getPicks':        result = getPicks(body);        break;
+      case 'savePick':        result = savePick(body);        break;
+      case 'getAllPicks':      result = getAllPicks();         break;
+      case 'getDuplicatePicks': result = getDuplicatePicks(); break;
+      default:                result = { success: false, message: 'Unknown action: ' + action };
     }
 
     return jsonResponse(result);
@@ -281,7 +282,65 @@ function getAllPicks() {
 }
 
 
+// ════════════════════════════════════════════════════════════════════
+//  FIND DUPLICATE PICKS
+//  Finds rows where userId + matchId + pick are identical.
+//  Writes a summary string to cell F1 of the Picks sheet in the format:
+//    "row x:row y, row a:row b, ..."  (spreadsheet row numbers, 1-indexed)
+//  Also returns the pairs via the API for programmatic use.
+//
+//  Usage via API: ?action=getDuplicatePicks
+//  Or run findDuplicatePicks() directly from the script editor.
+// ════════════════════════════════════════════════════════════════════
+function findDuplicatePicks() {
+  const sheet = getSheet(SHEET_PICKS);
+  const rows  = sheet.getDataRange().getValues();
 
+  // Build a map of key → [spreadsheet row numbers]
+  // Key = "userId~matchId~pick"
+  // Row numbers are 1-indexed (row 1 = header, data starts at row 2)
+  const keyMap = {};
+  for (let i = 1; i < rows.length; i++) {
+    const uid     = rows[i][P_USER  - 1];
+    const matchId = rows[i][P_MATCH - 1];
+    const pick    = rows[i][P_PICK  - 1];
+    if (!uid || !matchId || !pick) continue;
+
+    const key = `${uid}~${matchId}~${pick}`;
+    if (!keyMap[key]) keyMap[key] = [];
+    keyMap[key].push(i + 1); // +1 because row 1 is the header
+  }
+
+  // Generate all pairs for each group of duplicates
+  const pairs = [];
+  for (const key in keyMap) {
+    const group = keyMap[key];
+    if (group.length < 2) continue;
+    for (let i = 0; i < group.length; i++) {
+      for (let j = i + 1; j < group.length; j++) {
+        pairs.push(`${group[i]}:${group[j]}`);
+      }
+    }
+  }
+
+  const summary = pairs.join(', ');
+
+  // Write to F1 of the Picks sheet
+  sheet.getRange('F1').setValue(summary || 'No duplicates found');
+
+  return { success: true, duplicates: summary || null, count: pairs.length };
+}
+
+// Convenience wrapper so it can be run directly from the script editor
+// (e.g. as a menu item or timed trigger) without needing an HTTP call.
+function getDuplicatePicks() {
+  return findDuplicatePicks();
+}
+
+
+// ════════════════════════════════════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════════════════════════════════════
 function getSheet(name) {
   const ss = SHEET_ID
     ? SpreadsheetApp.openById(SHEET_ID)
