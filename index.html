@@ -1989,6 +1989,7 @@
 
       const totalPointsAllUsers = rows.reduce((sum, r) => sum + r.pts, 0);
       console.log("totalPointsAllUsers", totalPointsAllUsers);
+      document.title = totalPointsAllUsers;
 
       container.innerHTML = `
         <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
