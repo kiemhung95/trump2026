@@ -1,4 +1,4 @@
-{
+﻿{
   "matches": [
     {
       "id": "m001",
@@ -18,9 +18,9 @@
       "away": "Czech Republic",
       "rate": "0.5",
       "kickoff": "2026-06-12T09:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "id": "m003",
