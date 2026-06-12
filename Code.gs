@@ -326,7 +326,9 @@ function findDuplicatePicks() {
   const summary = pairs.join(', ');
 
   // Write to F1 of the Picks sheet
-  sheet.getRange('F1').setValue(summary || 'No duplicates found');
+  // Prepend a single quote so Sheets treats things like "353:354" as text, not a time format
+  const textToWrite = summary ? "'" + summary : 'No duplicates found';
+  sheet.getRange('F1').setValue(textToWrite);
 
   return { success: true, duplicates: summary || null, count: pairs.length };
 }

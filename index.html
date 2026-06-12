@@ -1987,6 +1987,9 @@
           </tr>`;
       }).join('');
 
+      const totalPointsAllUsers = rows.reduce((sum, r) => sum + r.pts, 0);
+      console.log("totalPointsAllUsers", totalPointsAllUsers);
+
       container.innerHTML = `
         <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
           <table class="leaderboard-table">
@@ -2010,6 +2013,14 @@
       document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
       document.getElementById('sec-' + name).classList.add('active');
       document.getElementById('nav-' + name).classList.add('active');
+
+      if (name === 'results') {
+        callScript('getDuplicatePicks').then(res => {
+          console.log('getDuplicatePicks result:', res);
+        }).catch(err => {
+          console.error('getDuplicatePicks error:', err);
+        });
+      }
     }
 
     // ════════════════════════════════════════════════════
