@@ -1694,7 +1694,7 @@
       return `
   <div class="match-card" id="mc-${m.id}">
     <div class="match-meta">
-      <span class="match-league">${m.league || 'League'}</span>
+      <span class="match-league">${m.league || 'League'} - ${m.id}</span>
       <span class="match-time ${locked ? 'locked' : ''}">${locked ? '🔒 Locked' : '⏰ ' + timeStr}</span>
     </div>
     <div class="match-teams">
@@ -1829,7 +1829,7 @@
           const rateSign = rate >= 0 ? `+${rate}` : `${rate}`;
           adjRow = `
       <div class="result-adj-score">
-        Rate: <span>${rateSign}</span> → Adjusted Score: <span>${adjHome % 1 === 0 ? adjHome : adjHome.toFixed(2)} – ${as}</span>
+        Rate: <span>${rateSign}</span> → Adjusted Score: <span>${adjHome % 1 === 0 ? adjHome : adjHome.toFixed(2)} : ${as}</span>
       </div>`;
         }
 
@@ -1841,7 +1841,7 @@
         return `
     <div class="result-card ${cardClass}">
       <div class="result-header">
-        <span class="result-league">${m.league || ''} ${rateChip}</span>
+        <span class="result-league">${m.league || ''} - ${m.id}</span>
         <span class="result-badge ${status}">${badgeText}</span>
       </div>
       <div class="result-scoreline">
