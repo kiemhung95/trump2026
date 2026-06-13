@@ -1,4 +1,4 @@
-﻿{
+{
   "matches": [
     {
       "id": "m001",
@@ -29,9 +29,9 @@
       "away": "Bosnia & Herzegovina",
       "rate": "0",
       "kickoff": "2026-06-13T02:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 1,
+      "awayScore": 1
     },
     {
       "id": "m004",
