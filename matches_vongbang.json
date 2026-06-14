@@ -84,9 +84,9 @@
       "away": "Turkey",
       "rate": "0.5",
       "kickoff": "2026-06-14T11:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 2,
+      "awayScore": 0
     },
     {
       "id": "m009",
