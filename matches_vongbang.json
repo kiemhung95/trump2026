@@ -73,9 +73,9 @@
       "away": "Scotland",
       "rate": "1",
       "kickoff": "2026-06-14T08:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 0,
+      "awayScore": 1
     },
     {
       "id": "m008",
