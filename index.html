@@ -1770,7 +1770,7 @@
     function renderResults() {
       const container = document.getElementById('results-list');
       // Show all matches that have kicked off (locked) — regardless of whether scores are in yet
-      const kickedOff = allMatches.filter(m => isKickoffPassed(m.kickoff));
+      const kickedOff = allMatches.filter(m => isKickoffPassed(m.kickoff)).reverse();
 
       if (!kickedOff.length) {
         container.innerHTML = `<div class="empty-state"><div class="empty-icon">🕐</div><div class="empty-text">No matches available yet — check back later!</div></div>`;
