@@ -43,7 +43,8 @@ function doGet(e) {
       case 'login':           result = login(body);           break;
       case 'getPicks':        result = getPicks(body);        break;
       case 'savePick':        result = savePick(body);        break;
-      case 'getAllPicks':      result = getAllPicks();         break;
+      case 'removePick':      result = removePick(body);      break;
+      case 'getAllPicks':     result = getAllPicks();         break;
       case 'getDuplicatePicks': result = getDuplicatePicks(); break;
       default:                result = { success: false, message: 'Unknown action: ' + action };
     }
