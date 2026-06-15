@@ -106,9 +106,9 @@
       "away": "Japan",
       "rate": "-0.5",
       "kickoff": "2026-06-15T03:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 2,
+      "awayScore": 2
     },
     {
       "id": "m011",
@@ -117,9 +117,9 @@
       "away": "Ecuador",
       "rate": "0",
       "kickoff": "2026-06-15T06:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 1,
+      "awayScore": 0
     },
     {
       "id": "m012",
