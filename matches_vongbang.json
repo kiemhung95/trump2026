@@ -1,4 +1,4 @@
-﻿{
+{
   "matches": [
     {
       "id": "m001",
@@ -227,9 +227,9 @@
       "away": "DR Congo",
       "rate": "-2",
       "kickoff": "2026-06-18T00:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 1,
+      "awayScore": 1
     },
     {
       "id": "m022",
@@ -238,9 +238,9 @@
       "away": "Croatia",
       "rate": "-1",
       "kickoff": "2026-06-18T03:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 4,
+      "awayScore": 2
     },
     {
       "id": "m023",
