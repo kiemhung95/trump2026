@@ -249,9 +249,9 @@
       "away": "Panama",
       "rate": "-1",
       "kickoff": "2026-06-18T06:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 1,
+      "awayScore": 0
     },
     {
       "id": "m024",
