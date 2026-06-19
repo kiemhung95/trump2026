@@ -1882,7 +1882,7 @@
     // ════════════════════════════════════════════════════
     // RENDER BALANCE
     // ════════════════════════════════════════════════════
-    function renderBalance() {
+    function renderBalance(showBanner = false) {
       let totalPoints = 0, correct = 0, wrong = 0, pending = 0;
 
       allMatches.forEach(m => {
@@ -1909,6 +1909,75 @@
       const ptEl = document.getElementById('bal-points');
       ptEl.textContent = totalPoints;
       ptEl.style.color = totalPoints > 0 ? 'var(--green)' : totalPoints < 0 ? 'var(--red)' : 'var(--muted)';
+
+      if (totalPoints < 0 && showBanner) {
+        let banner = document.getElementById('ga-banner');
+        if (!banner) {
+          banner = document.createElement('div');
+          banner.id = 'ga-banner';
+          banner.style.position = 'fixed';
+          banner.style.top = '0';
+          banner.style.left = '0';
+          banner.style.width = '100%';
+          banner.style.height = '100%';
+          banner.style.backgroundColor = 'rgba(0,0,0,0.8)';
+          banner.style.display = 'flex';
+          banner.style.justifyContent = 'center';
+          banner.style.alignItems = 'center';
+          banner.style.zIndex = '9999';
+
+          const box = document.createElement('div');
+          box.style.backgroundColor = 'var(--card, #1e1e1e)';
+          box.style.padding = '2rem';
+          box.style.borderRadius = '10px';
+          box.style.textAlign = 'center';
+          box.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
+
+          const text = document.createElement('div');
+          text.textContent = 'Âm điểm, gà';
+          text.style.fontSize = '1.2rem';
+          text.style.fontWeight = 'bold';
+          text.style.marginBottom = '1.5rem';
+          text.style.color = 'var(--text, #ffffff)';
+
+          const btnRow = document.createElement('div');
+          btnRow.style.display = 'flex';
+          btnRow.style.justifyContent = 'center';
+          btnRow.style.gap = '1rem';
+
+          const btnYes = document.createElement('button');
+          btnYes.textContent = 'OK, tui gà';
+          btnYes.style.padding = '0.5rem 1.5rem';
+          btnYes.style.border = 'none';
+          btnYes.style.borderRadius = '6px';
+          btnYes.style.backgroundColor = 'var(--green, #2ecc71)';
+          btnYes.style.color = '#fff';
+          btnYes.style.cursor = 'pointer';
+          btnYes.style.fontWeight = 'bold';
+          btnYes.onclick = function () {
+            banner.style.display = 'none';
+          };
+
+          const btnNo = document.createElement('button');
+          btnNo.textContent = 'Éo';
+          btnNo.disabled = true;
+          btnNo.style.padding = '0.5rem 1.5rem';
+          btnNo.style.border = 'none';
+          btnNo.style.borderRadius = '6px';
+          btnNo.style.backgroundColor = 'var(--muted, #666666)';
+          btnNo.style.color = '#fff';
+          btnNo.style.cursor = 'not-allowed';
+          btnNo.style.fontWeight = 'bold';
+
+          btnRow.appendChild(btnYes);
+          btnRow.appendChild(btnNo);
+          box.appendChild(text);
+          box.appendChild(btnRow);
+          banner.appendChild(box);
+          document.body.appendChild(banner);
+        }
+        banner.style.display = 'flex';
+      }
     }
 
     // ════════════════════════════════════════════════════
@@ -2021,6 +2090,10 @@
         }).catch(err => {
           console.error('getDuplicatePicks error:', err);
         });
+      }
+
+      if (name === 'balance') {
+        renderBalance(true);
       }
     }
 
