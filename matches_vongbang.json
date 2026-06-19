@@ -1,4 +1,4 @@
-{
+﻿{
   "matches": [
     {
       "id": "m001",
@@ -304,9 +304,9 @@
       "away": "South Korea",
       "rate": "-0.5",
       "kickoff": "2026-06-19T08:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 1,
+      "awayScore": 0
     },
     {
       "id": "m029",
