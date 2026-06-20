@@ -337,9 +337,9 @@
       "away": "Haiti",
       "rate": "-2.5",
       "kickoff": "2026-06-20T07:30:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 3,
+      "awayScore": 0
     },
     {
       "id": "m032",
