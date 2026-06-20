@@ -359,9 +359,9 @@
       "away": "Sweden",
       "rate": "-0.5",
       "kickoff": "2026-06-21T00:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 5,
+      "awayScore": 1
     },
     {
       "id": "m034",
@@ -370,9 +370,9 @@
       "away": "Ivory Coast",
       "rate": "-1.5",
       "kickoff": "2026-06-21T03:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "id": "m035",
