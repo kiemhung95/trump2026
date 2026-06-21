@@ -381,9 +381,9 @@
       "away": "Curacao",
       "rate": "-2.5",
       "kickoff": "2026-06-21T07:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "id": "m036",
