@@ -392,9 +392,9 @@
       "away": "Japan",
       "rate": "1.5",
       "kickoff": "2026-06-21T11:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 0,
+      "awayScore": 4
     },
     {
       "id": "m037",
