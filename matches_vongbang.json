@@ -1,4 +1,4 @@
-{
+﻿{
   "matches": [
     {
       "id": "m001",
@@ -436,9 +436,9 @@
       "away": "Egypt",
       "rate": "1",
       "kickoff": "2026-06-22T08:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 1,
+      "awayScore": 3
     },
     {
       "id": "m041",
