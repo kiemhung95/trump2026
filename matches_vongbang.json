@@ -1,4 +1,4 @@
-﻿{
+{
   "matches": [
     {
       "id": "m001",
@@ -447,9 +447,9 @@
       "away": "Austria",
       "rate": "-1.5",
       "kickoff": "2026-06-23T00:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 2,
+      "awayScore": 0
     },
     {
       "id": "m042",
@@ -458,9 +458,9 @@
       "away": "Iraq",
       "rate": "-3",
       "kickoff": "2026-06-23T04:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 3,
+      "awayScore": 0
     },
     {
       "id": "m043",
