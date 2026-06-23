@@ -491,9 +491,9 @@
       "away": "Uzbekistan",
       "rate": "-2",
       "kickoff": "2026-06-24T00:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 5,
+      "awayScore": 0
     },
     {
       "id": "m046",
@@ -502,9 +502,9 @@
       "away": "Ghana",
       "rate": "-2",
       "kickoff": "2026-06-24T03:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "id": "m047",
