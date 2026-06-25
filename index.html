@@ -1394,7 +1394,12 @@
     // ════════════════════════════════════════════════════
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyJpDBTS_JSxqo0X6r5TST6mEvObA0PlTD7S0pgGqlQoEBz1Va721yD5nXo-bko4CwR_Q/exec';
     // Path to your matches JSON file (relative or absolute URL)
-    const MATCHES_JSON_URL = './matches_vongbang.json';
+    const MATCHES_GROUP_STAGE_JSON_URL = './matches_vongbang.json';
+    const MATCHES_ROUND_OF_32_JSON_URL = './matches_vong32.json';
+    const MATCHES_ROUND_OF_16_JSON_URL = './matches_vong16.json';
+    const MATCHES_QUARTER_FINALS_JSON_URL = './matches_tuket.json';
+    const MATCHES_SEMI_FINALS_JSON_URL = './matches_banket.json';
+    const MATCHES_FINAL_JSON_URL = './matches_final.json';
 
     // ════════════════════════════════════════════════════
     // STATE
@@ -1579,9 +1584,32 @@
     // ════════════════════════════════════════════════════
     async function loadMatches() {
       try {
-        const res = await fetch(MATCHES_JSON_URL);
+        const res = await fetch(MATCHES_GROUP_STAGE_JSON_URL);
         const data = await res.json();
         allMatches = data.matches || data;
+
+        const urls = [
+          MATCHES_ROUND_OF_32_JSON_URL,
+          MATCHES_ROUND_OF_16_JSON_URL,
+          MATCHES_QUARTER_FINALS_JSON_URL,
+          MATCHES_SEMI_FINALS_JSON_URL,
+          MATCHES_FINAL_JSON_URL
+        ];
+
+        for (const url of urls) {
+          try {
+            const r = await fetch(url);
+            if (r.ok) {
+              const d = await r.json();
+              if (d) {
+                const m = d.matches || d;
+                allMatches = allMatches.concat(m);
+              }
+            }
+          } catch (err) {
+            console.log("Could not load " + url);
+          }
+        }
       } catch (e) {
         allMatches = getSampleMatches(); // fallback demo data
       }
@@ -1886,10 +1914,21 @@
       let totalPoints = 0, correct = 0, wrong = 0, pending = 0;
 
       allMatches.forEach(m => {
+        const num = parseInt(m.id.replace(/\D/g, ''), 10);
         const pick = userPicks[m.id];
-        if (!pick) return;
         const outcome = computeOutcome(m);
         const mult = getMatchMultiplier(m.id);
+        // if 'no pick' and matchId >= 73 then consider as 'wrong'
+        if (!pick) {
+          if (num < 73) {
+            return;
+          } else {
+            wrong++;
+            totalPoints -= mult;
+            return;
+          }
+        }
+
         if (outcome === null) {
           pending++;
         } else if (pick === outcome) {
@@ -1910,7 +1949,7 @@
       ptEl.textContent = totalPoints;
       ptEl.style.color = totalPoints > 0 ? 'var(--green)' : totalPoints < 0 ? 'var(--red)' : 'var(--muted)';
 
-      if (totalPoints < 0 && showBanner) {
+      if (showBanner) {
         let banner = document.getElementById('ga-banner');
         if (!banner) {
           banner = document.createElement('div');
@@ -1934,7 +1973,7 @@
           box.style.boxShadow = '0 4px 12px rgba(0,0,0,0.5)';
 
           const text = document.createElement('div');
-          text.textContent = 'Âm điểm, gà';
+          text.textContent = 'From the Round of 32 onwards, any unpicked matches will be counted as wrong picks, and points will be deducted according to the point rule.';
           text.style.fontSize = '1.2rem';
           text.style.fontWeight = 'bold';
           text.style.marginBottom = '1.5rem';
@@ -1946,7 +1985,7 @@
           btnRow.style.gap = '1rem';
 
           const btnYes = document.createElement('button');
-          btnYes.textContent = 'OK, tui gà';
+          btnYes.textContent = 'Accept';
           btnYes.style.padding = '0.5rem 1.5rem';
           btnYes.style.border = 'none';
           btnYes.style.borderRadius = '6px';
@@ -1959,7 +1998,7 @@
           };
 
           const btnNo = document.createElement('button');
-          btnNo.textContent = 'Éo';
+          btnNo.textContent = 'Reject';
           btnNo.disabled = true;
           btnNo.style.padding = '0.5rem 1.5rem';
           btnNo.style.border = 'none';
@@ -2017,11 +2056,20 @@
         const picks = allPicks[uid];
         let pts = 0, cor = 0, wrg = 0;
         allMatches.forEach(m => {
-          const pick = picks[m.id];
-          if (!pick) return;
+          const num = parseInt(m.id.replace(/\D/g, ''), 10);
           const outcome = computeOutcome(m);
-          if (outcome === null) return;
           const mult = getMatchMultiplier(m.id);
+          const pick = picks[m.id];
+          if (!pick) {
+            if (num < 73) {
+              return;
+            } else {
+              wrg++;
+              pts -= mult;
+              return;
+            }
+          }
+          if (outcome === null) return;
           if (pick === outcome) { cor++; pts += mult; }
           else if (outcome === 'draw') { }
           else { wrg++; pts -= mult; }
