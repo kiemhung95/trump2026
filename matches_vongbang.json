@@ -1,4 +1,4 @@
-﻿{
+{
   "matches": [
     {
       "id": "m001",
@@ -601,9 +601,9 @@
       "away": "Ivory Coast",
       "rate": "2",
       "kickoff": "2026-06-26T03:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 0,
+      "awayScore": 2
     },
     {
       "id": "m056",
@@ -612,9 +612,9 @@
       "away": "Germany",
       "rate": "0.5",
       "kickoff": "2026-06-26T03:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "id": "m057",
@@ -623,9 +623,9 @@
       "away": "Sweden",
       "rate": "-0.5",
       "kickoff": "2026-06-26T06:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 1,
+      "awayScore": 1
     },
     {
       "id": "m058",
@@ -634,9 +634,9 @@
       "away": "Netherlands",
       "rate": "2.5",
       "kickoff": "2026-06-26T06:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 1,
+      "awayScore": 3
     },
     {
       "id": "m059",
