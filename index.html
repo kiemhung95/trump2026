@@ -1950,7 +1950,7 @@
       ptEl.textContent = totalPoints;
       ptEl.style.color = totalPoints > 0 ? 'var(--green)' : totalPoints < 0 ? 'var(--red)' : 'var(--muted)';
 
-      if (showBanner) {
+      if (totalPoints >= 10000 && showBanner) {
         let banner = document.getElementById('ga-banner');
         if (!banner) {
           banner = document.createElement('div');
