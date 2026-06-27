@@ -689,9 +689,9 @@
       "away": "Saudi Arabia",
       "rate": "-1",
       "kickoff": "2026-06-27T07:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "id": "m064",
@@ -700,9 +700,9 @@
       "away": "Spain",
       "rate": "1.5",
       "kickoff": "2026-06-27T07:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 0,
+      "awayScore": 1
     },
     {
       "id": "m065",
