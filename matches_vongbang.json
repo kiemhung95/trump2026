@@ -1,4 +1,4 @@
-﻿{
+{
   "matches": [
     {
       "id": "m001",
@@ -667,9 +667,9 @@
       "away": "France",
       "rate": "1",
       "kickoff": "2026-06-27T02:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 1,
+      "awayScore": 4
     },
     {
       "id": "m062",
@@ -678,9 +678,9 @@
       "away": "Iraq",
       "rate": "-2",
       "kickoff": "2026-06-27T02:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 5,
+      "awayScore": 0
     },
     {
       "id": "m063",
