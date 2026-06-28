@@ -755,9 +755,9 @@
       "away": "Portugal",
       "rate": "1",
       "kickoff": "2026-06-28T06:30:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 0,
+      "awayScore": 0
     },
     {
       "id": "m070",
@@ -766,9 +766,9 @@
       "away": "Uzbekistan",
       "rate": "-1",
       "kickoff": "2026-06-28T06:30:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 3,
+      "awayScore": 1
     },
     {
       "id": "m071",
