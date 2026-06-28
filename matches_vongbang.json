@@ -733,9 +733,9 @@
       "away": "Ghana",
       "rate": "-0.5",
       "kickoff": "2026-06-28T04:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 2,
+      "awayScore": 1
     },
     {
       "id": "m068",
@@ -744,9 +744,9 @@
       "away": "England",
       "rate": "2",
       "kickoff": "2026-06-28T04:00:00+07:00",
-      "result": "",
-      "homeScore": null,
-      "awayScore": null
+      "result": "y",
+      "homeScore": 0,
+      "awayScore": 2
     },
     {
       "id": "m069",
