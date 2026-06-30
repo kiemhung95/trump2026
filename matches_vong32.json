@@ -29,9 +29,9 @@
             "away": "Morocco",
             "rate": "-0.5",
             "kickoff": "2026-06-30T08:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 1,
+            "awayScore": 1
         },
         {
             "id": "m076",
