@@ -84,9 +84,9 @@
             "away": "Congo DR",
             "rate": "-1.5",
             "kickoff": "2026-07-01T23:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 2,
+            "awayScore": 1
         },
         {
             "id": "m081",
@@ -106,9 +106,9 @@
             "away": "Senegal",
             "rate": "-0.5",
             "kickoff": "2026-07-02T03:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 2,
+            "awayScore": 2
         },
         {
             "id": "m083",
