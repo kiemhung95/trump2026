@@ -95,9 +95,9 @@
             "away": "Bosnia and Herzegovina",
             "rate": "-1.5",
             "kickoff": "2026-07-02T07:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 2,
+            "awayScore": 0
         },
         {
             "id": "m082",
