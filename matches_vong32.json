@@ -139,9 +139,9 @@
             "away": "Algeria",
             "rate": "-0.5",
             "kickoff": "2026-07-03T10:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 2,
+            "awayScore": 0
         },
         {
             "id": "m086",
