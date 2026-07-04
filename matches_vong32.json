@@ -161,9 +161,9 @@
             "away": "Ghana",
             "rate": "-1.5",
             "kickoff": "2026-07-04T08:30:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 1,
+            "awayScore": 0
         },
         {
             "id": "m088",
