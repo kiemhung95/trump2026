@@ -150,9 +150,9 @@
             "away": "Cape Verde",
             "rate": "-2",
             "kickoff": "2026-07-04T05:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 1,
+            "awayScore": 1
         },
         {
             "id": "m087",
@@ -172,9 +172,9 @@
             "away": "Egypt",
             "rate": "0.5",
             "kickoff": "2026-07-04T01:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 1,
+            "awayScore": 1
         }
     ]
 }
