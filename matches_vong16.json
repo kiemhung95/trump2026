@@ -7,9 +7,9 @@
             "away": "France",
             "rate": "2",
             "kickoff": "2026-07-05T04:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 0,
+            "awayScore": 1
         },
         {
             "id": "m090",
@@ -18,9 +18,9 @@
             "away": "Morocco",
             "rate": "1",
             "kickoff": "2026-07-05T00:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 0,
+            "awayScore": 3
         },
         {
             "id": "m091",
