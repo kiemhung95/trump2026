@@ -40,9 +40,9 @@
             "away": "England",
             "rate": "0.5",
             "kickoff": "2026-07-06T07:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 2,
+            "awayScore": 3
         },
         {
             "id": "m093",
