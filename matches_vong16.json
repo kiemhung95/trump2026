@@ -29,9 +29,9 @@
             "away": "Norway",
             "rate": "-0.5",
             "kickoff": "2026-07-06T03:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 1,
+            "awayScore": 2
         },
         {
             "id": "m092",
