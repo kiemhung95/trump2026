@@ -73,9 +73,9 @@
             "away": "Egypt",
             "rate": "-1.5",
             "kickoff": "2026-07-07T23:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 3,
+            "awayScore": 2
         },
         {
             "id": "m096",
