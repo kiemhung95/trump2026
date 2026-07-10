@@ -7,9 +7,9 @@
             "away": "Morocco",
             "rate": "-1",
             "kickoff": "2026-07-10T03:00:00+07:00",
-            "result": "",
-            "homeScore": null,
-            "awayScore": null
+            "result": "y",
+            "homeScore": 2,
+            "awayScore": 0
         },
         {
             "id": "m098",
