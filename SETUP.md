@@ -1,4 +1,4 @@
-# ⚽ The Gaffer's Den — Setup Guide
+# Setup Guide
 
 ## Files Overview
 | File | Purpose |
