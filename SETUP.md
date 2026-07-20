@@ -52,7 +52,7 @@ const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
 
 Replace `YOUR_APPS_SCRIPT_URL_HERE` with your Web App URL from Step 2.
 
-Replace `MATCHES_JSON_URL` with the corresponding `json` file
+Replace `MATCHES_XX_JSON_URL` with the corresponding `json` file
 
 ---
 
@@ -149,6 +149,7 @@ Currently:
 | Semi Final | +/-5 pt |
 | Final / Third-place match | +/-10 pt |
 
+**Note**: From matchId m072 onwards (knock-out rounds), unpick match will be treated as wrong result and point will be reducted follow the point rules.
 ---
 
 ## Troubleshooting
